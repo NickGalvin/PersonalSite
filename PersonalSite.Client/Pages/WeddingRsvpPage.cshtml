@@ -1,0 +1,54 @@
+﻿@using PersonalSite.Shared
+@page "/RSVP"
+@inject HttpClient Http
+
+<h1>Weather forecast</h1>
+
+<p>This component demonstrates fetching data from the server.</p>
+
+@if (rsvp == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <h1>RSVP</h1>
+
+    <div>
+        @foreach (var person in rsvp.Attendees)
+        {
+            <div class="attendee">
+
+                <div class="name-container">
+                    <input bind="@person.FirstName" type="text" />
+                    <input bind="@person.LastName" type="text" />
+                </div>
+
+                <div class="other-details">
+                    <input bind="@person.RequestChildMeal" type="checkbox" />
+                    <input bind="@person.DietaryRestrictions" type="text" />
+                </div>
+            </div>
+        }
+
+        <button onclick="@AddPerson"></button>
+    </div>
+}
+
+@functions {
+    WeddingRSVP rsvp = new WeddingRSVP();
+
+    protected override async Task OnInitAsync()
+    {
+    }
+    public async void SubmitRSVP(WeddingRSVP rsvp)
+    {
+        var response = await Http.PostJsonAsync<WeddingRSVP>("api/RSVP", rsvp);
+
+    }
+
+    public void AddPerson()
+    {
+        this.rsvp.Attendees.Add(new WeddingAttendee());
+    }
+}

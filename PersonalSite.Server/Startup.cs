@@ -3,7 +3,9 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.Extensions.DependencyInjection;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
+using PersonalSite.Server.Data;
 using System.Linq;
 using System.Net.Mime;
 
@@ -16,6 +18,8 @@ namespace PersonalSite.Server
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+                //.AddJsonOptions(opt => opt.SerializerSettings.ContractResolver = new DefaultContractResolver()) //Use PascalCase in responses instead of camelCase
+                //.AddJsonOptions(opt => opt.SerializerSettings.NullValueHandling = NullValueHandling.Ignore);
 
             services.AddResponseCompression(options =>
             {
@@ -25,6 +29,10 @@ namespace PersonalSite.Server
                     WasmMediaTypeNames.Application.Wasm,
                 });
             });
+          //  services.Configure<IISOptions>(o => o.AutomaticAuthentication = true);
+
+            services.AddEntityFrameworkInMemoryDatabase();
+            services.AddDbContext<RsvpDbContext>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
