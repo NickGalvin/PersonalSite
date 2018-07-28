@@ -1,11 +1,32 @@
 ﻿@using PersonalSite.Shared
+@using Microsoft.JSInterop;
 @page "/RSVP"
 @inject HttpClient Http
 
-<h1>Weather forecast</h1>
+<link href="https://fonts.googleapis.com/css?family=Muli|Titillium+Web" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Crimson+Text" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Caveat+Brush|Great+Vibes|Lobster" rel="stylesheet">
+<link href="~/js/site.js" />
 
-<p>This component demonstrates fetching data from the server.</p>
+<style>
+    #RsvpForm{
+        width: 75%;
+        background-color:lightgray;
+    }
 
+    #RsvpForm>div{
+        margin: 2em;
+    }
+
+    .remove-person{
+
+    }
+
+    #SubmitRsvp{
+        position: fixed;
+        bottom: 3em;
+    }
+</style>
 @if (rsvp == null)
 {
     <p><em>Loading...</em></p>
@@ -14,41 +35,85 @@ else
 {
     <h1>RSVP</h1>
 
-    <div>
+    <div id="RsvpForm" class="center column">
         @foreach (var person in rsvp.Attendees)
         {
-            <div class="attendee">
+            <div class="attendee center">
 
-                <div class="name-container">
-                    <input bind="@person.FirstName" type="text" />
-                    <input bind="@person.LastName" type="text" />
+                <div class="attendee-form">
+
+                    <div class="attendee-info name-container form-group">
+                        <label for="@person.Name">Name</label>
+                        <input class="firstname form-control" bind="@person.Name" required type="text" />
+                    </div>
+
+                    <div class="attendee-info meal-info form-group form-horizontal">
+                        <div class="kids-meal">
+                            <label for="@person.RequestChildMeal">Request Child Meal?</label>
+                            <input class="ChildMeal form-control" bind="@person.RequestChildMeal" type="checkbox" />
+                        </div>
+
+                        <div class="attendee-info form-group form-horizontal">
+                            <div class="description">Kids Meal</div>
+                            <div class="description">Chicken Nuggets with Fries</div>
+
+                        </div>
+
+                        <div class="attendee-info restrictions form-group form-horizontal">
+                            <div class="description">Kids Meal</div>
+                            <div class="description">Chicken Nuggets with Fries</div>
+                            <label for="@person.DietaryRestrictions">Dietary Restrictions</label>
+                            <input class="DietaryRestrictions form-control" bind="@person.DietaryRestrictions" type="text" />
+                        </div>
+                    </div>
                 </div>
 
-                <div class="other-details">
-                    <input bind="@person.RequestChildMeal" type="checkbox" />
-                    <input bind="@person.DietaryRestrictions" type="text" />
+                <div class="remove-container">
+                    @if (rsvp.Attendees.Count > 1)
+                    {
+                        <button class="btn remove-person" style="color:red;" onclick="@(() => RemovePerson(person))">X</button>
+                    }
                 </div>
             </div>
         }
 
-        <button onclick="@AddPerson"></button>
+        <div id="button-container center">
+            <button id="AddPerson" class="btn btn-default" onclick="@AddPerson">Add Person</button>
+        </div>
+
+        <button id="SubmitRsvp" class="btn btn-primary btn-lg" onclick="@SubmitRSVP">Submit RSVP</button>
+
     </div>
 }
 
 @functions {
+
     WeddingRSVP rsvp = new WeddingRSVP();
 
     protected override async Task OnInitAsync()
     {
     }
-    public async void SubmitRSVP(WeddingRSVP rsvp)
-    {
-        var response = await Http.PostJsonAsync<WeddingRSVP>("api/RSVP", rsvp);
 
+    public async void SubmitRSVP()
+    {
+        bool isValid = await JSRuntime.Current.InvokeAsync<bool>("validateRsvpForm");
+
+        if (isValid)
+        {
+            var response = await Http.PostJsonAsync<WeddingRSVP>("api/RSVP", rsvp);
+        }
     }
 
     public void AddPerson()
     {
         this.rsvp.Attendees.Add(new WeddingAttendee());
     }
+
+    public void RemovePerson(WeddingAttendee p)
+    {
+        this.rsvp.Attendees.Remove(p);
+    }
+
 }
+
+

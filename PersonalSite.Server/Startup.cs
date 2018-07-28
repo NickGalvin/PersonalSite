@@ -6,6 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using PersonalSite.Server.Data;
+using PersonalSite.Server.Services;
 using System.Linq;
 using System.Net.Mime;
 
@@ -29,8 +30,9 @@ namespace PersonalSite.Server
                     WasmMediaTypeNames.Application.Wasm,
                 });
             });
-          //  services.Configure<IISOptions>(o => o.AutomaticAuthentication = true);
+            //  services.Configure<IISOptions>(o => o.AutomaticAuthentication = true);
 
+            services.AddTransient<RsvpService>();
             services.AddEntityFrameworkInMemoryDatabase();
             services.AddDbContext<RsvpDbContext>();
         }

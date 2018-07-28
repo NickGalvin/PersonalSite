@@ -10,6 +10,17 @@ app {
     flex-direction: column;
 }
 
+.center{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.column{
+    flex-direction: column;
+}
+
 .top-row {
     height: 3.5rem;
     display: flex;
@@ -119,5 +130,20 @@ app {
     .sidebar .collapse {
         /* Never collapse the sidebar for wide screens */
         display: block;
+    }
+
+    .attendee{
+        margin: 2em 0;
+    }
+
+    .attendee-info {
+        margin: .5em;
+    }
+    .remove-person {
+        flex-direction: row-reverse;
+    }
+
+    .validation-error{
+        border: 1px solid red;
     }
 }

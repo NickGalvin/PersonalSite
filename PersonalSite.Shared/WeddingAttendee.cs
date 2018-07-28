@@ -6,9 +6,7 @@ namespace PersonalSite.Shared
 {
     public class WeddingAttendee
     {
-        public string FirstName { get; set; }
-
-        public string LastName { get; set; }
+        public string Name { get; set; }
 
         public bool RequestChildMeal { get; set; }
 

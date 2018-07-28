@@ -32,15 +32,13 @@ namespace PersonalSite.Server.Controllers
                     {
                         new WeddingAttendee()
                         {
-                            FirstName = "Bentley",
-                            LastName = "Pup",
+                            Name = "Bentley",
                             RequestChildMeal = false,
                             DietaryRestrictions = "Steak and Peanut Butter"
                         },
                         new WeddingAttendee()
                         {
-                            FirstName = "Mandy",
-                            LastName = "Anderson",
+                            Name = "Mandy",
                             RequestChildMeal = false,
                             DietaryRestrictions = "Nick's Penis"
                         },
@@ -53,14 +51,12 @@ namespace PersonalSite.Server.Controllers
                     {
                         new WeddingAttendee()
                         {
-                            FirstName = "Number",
-                            LastName = "Two",
+                            Name = "Number Two",
                             RequestChildMeal = false,
                        },
                         new WeddingAttendee()
                         {
-                            FirstName = "Dr",
-                            LastName = "Evil",
+                            Name = "Dr. Evil",
                             RequestChildMeal = false,
                         },
                     }
@@ -83,6 +79,8 @@ namespace PersonalSite.Server.Controllers
             try
             {
                 rsvp.Id = Guid.NewGuid().ToString();
+                Response.Cookies.Append("RSVP", rsvp.Id);
+
                 return Ok(rsvp);
 
                 //_rsvpService.SaveRSVP(rsvp);
