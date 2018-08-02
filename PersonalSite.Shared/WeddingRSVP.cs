@@ -12,6 +12,7 @@ namespace PersonalSite.Shared
         }
 
         public string Id { get; set; }
+        public DateTime RsvpDate { get; set; }
 
         public List<WeddingAttendee> Attendees { get; set; }
 

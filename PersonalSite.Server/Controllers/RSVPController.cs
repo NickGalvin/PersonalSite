@@ -20,7 +20,8 @@ namespace PersonalSite.Server.Controllers
             _rsvpService = rsvpService;
         }
 
-        [HttpGet("/All")]
+        [HttpGet]
+        [Route("/All")]
         public IActionResult GetAllRSVP()
         {
             var rsvp = new List<WeddingRSVP>()
@@ -33,14 +34,14 @@ namespace PersonalSite.Server.Controllers
                         new WeddingAttendee()
                         {
                             Name = "Bentley",
-                            RequestChildMeal = false,
-                            DietaryRestrictions = "Steak and Peanut Butter"
+                            DietaryRestrictions = "Steak and Peanut Butter",
+                            Status = WeddingAttendee.AttendenceStatus.Accept
                         },
                         new WeddingAttendee()
                         {
                             Name = "Mandy",
-                            RequestChildMeal = false,
-                            DietaryRestrictions = "Nick's Penis"
+                            DietaryRestrictions = "Nick's Penis",
+                            Status = WeddingAttendee.AttendenceStatus.Accept
                         },
                     }
                 },
@@ -52,18 +53,19 @@ namespace PersonalSite.Server.Controllers
                         new WeddingAttendee()
                         {
                             Name = "Number Two",
-                            RequestChildMeal = false,
+                            Status = WeddingAttendee.AttendenceStatus.Accept
                        },
                         new WeddingAttendee()
                         {
                             Name = "Dr. Evil",
-                            RequestChildMeal = false,
+                            Status = WeddingAttendee.AttendenceStatus.Accept
                         },
                     }
                 },
             };
-            var allRsvp = _rsvpService.GetAllRSVP();
-            return Ok(allRsvp);
+
+            //var allRsvp = _rsvpService.GetAllRSVP();
+            return Ok(rsvp);
         }
 
         // GET: api/RSVP/5

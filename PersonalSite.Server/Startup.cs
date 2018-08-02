@@ -47,10 +47,7 @@ namespace PersonalSite.Server
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseMvc(routes =>
-            {
-                routes.MapRoute(name: "default", template: "{controller}/{action}/{id?}");
-            });
+            app.UseMvc();
 
             app.UseBlazor<Client.Program>();
         }
