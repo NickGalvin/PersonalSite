@@ -48,7 +48,6 @@ namespace PersonalSite.Server
             }
 
             app.UseMvc();
-
             app.UseBlazor<Client.Program>();
         }
     }

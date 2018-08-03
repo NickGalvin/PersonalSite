@@ -21,7 +21,6 @@ namespace PersonalSite.Server.Controllers
         }
 
         [HttpGet]
-        [Route("/All")]
         public IActionResult GetAllRSVP()
         {
             var rsvp = new List<WeddingRSVP>()
@@ -66,13 +65,6 @@ namespace PersonalSite.Server.Controllers
 
             //var allRsvp = _rsvpService.GetAllRSVP();
             return Ok(rsvp);
-        }
-
-        // GET: api/RSVP/5
-        [HttpGet("{id}", Name = "Get")]
-        public string Get(int id)
-        {
-            return "value";
         }
 
         [HttpPost]
