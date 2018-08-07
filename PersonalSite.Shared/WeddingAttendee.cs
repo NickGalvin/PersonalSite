@@ -15,11 +15,5 @@ namespace PersonalSite.Shared
         public string DietaryRestrictions { get; set; }
 
         public AttendenceStatus Status { get; set; }
-
-        public enum AttendenceStatus
-        {
-            Accept,
-            Decline
-        }
     }
 }

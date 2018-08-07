@@ -21,6 +21,9 @@ namespace PersonalSite.Server.Services
 
         public async void SaveRSVP(WeddingRSVP rsvp)
         {
+            rsvp.RsvpDate = DateTime.Now;
+            rsvp.Id = Guid.NewGuid().ToString("N");
+
             _rsvpDb.RSVPs.Add(rsvp);
             await _rsvpDb.SaveChangesAsync();
         }

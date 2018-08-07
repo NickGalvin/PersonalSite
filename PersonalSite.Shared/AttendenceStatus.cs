@@ -6,8 +6,8 @@ namespace PersonalSite.Shared
 {
     public enum AttendenceStatus
     {
-        IllBeThere,
-        CantMaktIt,
-
+        None,
+        Accept,
+        Decline,
     }
 }

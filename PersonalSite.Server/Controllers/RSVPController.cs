@@ -28,36 +28,40 @@ namespace PersonalSite.Server.Controllers
                 new WeddingRSVP()
                 {
                     Id = Guid.NewGuid().ToString("N"),
+                    RsvpDate = DateTime.Now,
+                    Comments = "Please make sure there is plenty of steak and peanut butter otherwise Bentley will get furrrocious.",
                     Attendees = new List<WeddingAttendee>()
                     {
                         new WeddingAttendee()
                         {
                             Name = "Bentley",
                             DietaryRestrictions = "Steak and Peanut Butter",
-                            Status = WeddingAttendee.AttendenceStatus.Accept
+                            Status = AttendenceStatus.Accept
                         },
                         new WeddingAttendee()
                         {
                             Name = "Mandy",
                             DietaryRestrictions = "Nick's Penis",
-                            Status = WeddingAttendee.AttendenceStatus.Accept
+                            Status = AttendenceStatus.Accept
                         },
                     }
                 },
                 new WeddingRSVP()
                 {
                     Id = Guid.NewGuid().ToString("N"),
+                    RsvpDate = DateTime.Now.AddDays(-7),
+                    Comments = "Can't Wait!",
                     Attendees = new List<WeddingAttendee>()
                     {
                         new WeddingAttendee()
                         {
                             Name = "Number Two",
-                            Status = WeddingAttendee.AttendenceStatus.Accept
+                            Status = AttendenceStatus.Accept
                        },
                         new WeddingAttendee()
                         {
                             Name = "Dr. Evil",
-                            Status = WeddingAttendee.AttendenceStatus.Accept
+                            Status = AttendenceStatus.Accept
                         },
                     }
                 },
