@@ -298,7 +298,7 @@ else
 }
 
 @functions {
-
+    WeddingRSVP test = this;
     WeddingRSVP rsvp = new WeddingRSVP();
 
     protected override async Task OnInitAsync()
@@ -333,6 +333,7 @@ else
         var last = rsvp.Attendees.Last();
         this.rsvp.Attendees.Remove(last);
     }
+
 
 }
 
