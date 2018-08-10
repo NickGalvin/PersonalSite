@@ -24,14 +24,33 @@ namespace PersonalSite.Shared.FindBy
         public string CssClass { get; set; }
     }
 
-    public class FindAllByCssSelectorAttribute : Attribute, where T : IEnumerable<>
+    public class FindAllByCssAttribute : Attribute
     {
-        public FindAllByClassAttribute<T>(string cssClass)
+        public FindAllByCssAttribute(string cssClass)
         {
 
         }
 
-        public string CssClass { get; set; }
+        public string CssSelector { get; set; }
     }
 
+    public class FindAllByXPathAttribute : Attribute
+    {
+        public FindAllByXPathAttribute(string cssClass)
+        {
+
+        }
+
+        public string CssSelector { get; set; }
+    }
+
+    public class FindByXPathAttribute : Attribute
+    {
+        public FindByXPathAttribute(string cssClass)
+        {
+
+        }
+
+        public string CssSelector { get; set; }
+    }
 }

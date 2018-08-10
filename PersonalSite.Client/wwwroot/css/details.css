@@ -1,0 +1,57 @@
+﻿/**************
+    DETAILS PAGE
+***************/
+
+
+#Details {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.description {
+    margin: 1em .75em;
+    font-family: 'muli', sans-serif;
+    font-size: 2em;
+}
+
+.directions-container {
+    padding: 1em;
+}
+
+.place {
+    text-align: center;
+    margin-top: 3em;
+    padding: 1em 3em;
+}
+
+.important {
+    font-weight: bold;
+}
+
+.directions-link {
+    font-size: 1.5em;
+    margin: 1em 0;
+    color: black;
+    background-color: no;
+}
+
+    .directions-link:hover {
+        color: black;
+    }
+
+    .directions-link img {
+        height: 25px;
+        width: auto;
+    }
+
+#DirectionsContainer {
+    margin-top: 10em;
+}
+
+@media only screen and (max-width: 600px) {
+    .place {
+        padding: 0;
+    }
+}

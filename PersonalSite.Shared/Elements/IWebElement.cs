@@ -9,6 +9,11 @@ namespace PersonalSite.Shared.Elements
 
     }
 
+    public interface IWebElement<T>
+    {
+
+    }
+
     public interface ISelect : IWebElement
     {
 
@@ -17,7 +22,5 @@ namespace PersonalSite.Shared.Elements
     public interface ITextBox : IWebElement
     {
 
-    }
-
-    
+    }    
 }
