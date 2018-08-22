@@ -222,83 +222,83 @@
 else
 {
     <h1>RSVP for Nick and Mandy's Wedding Reception</h1>
-
-    <div id="RsvpForm" class="">
-        @foreach (var person in rsvp.Attendees)
-        {
-            <div class="attendee">
-                <div class="attendee-form">
-                    <div class="attendee-info name-container form-group row">
-                        <label class="col-sm-4 col-xl-2 col-form-label col-form-label-sm name-label" for="@person.Name">Name</label>
-                        <div class="col-sm-8 col-xl-10 center column">
-                            <div class="name-message text-danger"></div>
-                            <input class="name form-control " bind="@person.Name" required type="text" />
-                        </div>
-                    </div>
-
-                    <div class="attendee-info restrictions form-group row">
-                        <label class="col-sm-4 col-xl-2 col-form-label col-form-label-sm" for="@person.DietaryRestrictions">Dietary Restrictions</label>
-                        <div class="col-sm-8 col-xl-10 center">
-                            <input class="diet-restrictions form-control" bind="@person.DietaryRestrictions" type="text" />
-                        </div>
-                    </div>
-
-                    <div class="form-group row">
-                        <label class="col-sm-4 col-xl-2 col-form-label col-form-label-sm" for="@person.Status">Reception Attendence</label>
-                        <div class="col-sm-8 col-xl-10 center column">
-                            <div class="attendance-message text-danger"></div>
-                            <select class="form-control attendance" bind="@person.Status" required>
-                                <option value="" disabled selected>Are you able to attend?</option>
-                                <option value="Accept">I'll Be There</option>
-                                <option value="Decline">Can't Make It</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-
-                @if (rsvp.Attendees.Count > 1 && rsvp.Attendees.Last() != person)
-                {
-                    <div class="line"></div>
-                }
-
-            </div>
-        }
-
-        <div id="button-container form-group">
-            <button id="AddPerson" class="btn btn-secondary" onclick="@AddPerson">Add Person</button>
-
-            @if (rsvp.Attendees.Count > 1)
+    <form>
+        <div id="RsvpForm" class="container-fluid">
+            @foreach (var person in rsvp.Attendees)
             {
-                <button class="btn btn-secondary" onclick="@RemovePerson">Remove Person</button>
+                <div class="attendee container">
+                    <div class="attendee-form">
+                        <div class="attendee-info name-container form-group row">
+                            <label class="col-sm-4 col-xl-2 col-form-label col-form-label-sm name-label" for="@person.Name">Name</label>
+                            <div class="col-sm-8 col-xl-10 center column">
+                                <div class="name-message text-danger"></div>
+                                <input class="name form-control " bind="@person.Name" required type="text" />
+                            </div>
+                        </div>
+
+                        <div class="attendee-info restrictions form-group row">
+                            <label class="col-sm-4 col-xl-2 col-form-label col-form-label-sm" for="@person.DietaryRestrictions">Dietary Restrictions</label>
+                            <div class="col-sm-8 col-xl-10 center">
+                                <input class="diet-restrictions form-control" bind="@person.DietaryRestrictions" type="text" />
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-sm-4 col-xl-2 col-form-label col-form-label-sm" for="@person.Status">Reception Attendence</label>
+                            <div class="col-sm-8 col-xl-10 center column">
+                                <div class="attendance-message text-danger"></div>
+                                <select class="form-control attendance" bind="@person.Status" required>
+                                    <option value="" disabled selected>Are you able to attend?</option>
+                                    <option value="Accept">I'll Be There</option>
+                                    <option value="Decline">Can't Make It</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    @if (rsvp.Attendees.Count > 1 && rsvp.Attendees.Last() != person)
+                    {
+                        <div class="line"></div>
+                    }
+
+                </div>
             }
+
+            <div id="button-container form-group">
+                <button id="AddPerson" class="btn btn-secondary" onclick="@AddPerson">Add Person</button>
+
+                @if (rsvp.Attendees.Count > 1)
+                {
+                    <button class="btn btn-secondary" onclick="@RemovePerson">Remove Person</button>
+                }
+            </div>
+
+            <div class="form-group comment-container">
+                <label for="Comments">Comments</label>
+                <textarea id="Comments" class="form-control" bind="@rsvp.Comments"></textarea>
+            </div>
+            <button id="SubmitRsvp" class="btn btn-primary btn-lg" onclick="@SubmitRSVP">Submit RSVP</button>
+
         </div>
 
-        <div class="form-group comment-container">
-            <label for="Comments">Comments</label>
-            <textarea id="Comments" class="form-control" bind="@rsvp.Comments"></textarea>
+        <div id="LoadingSpinner" class="sk-circle" style="display: none;">
+            <div class="sk-circle1 sk-child"></div>
+            <div class="sk-circle2 sk-child"></div>
+            <div class="sk-circle3 sk-child"></div>
+            <div class="sk-circle4 sk-child"></div>
+            <div class="sk-circle5 sk-child"></div>
+            <div class="sk-circle6 sk-child"></div>
+            <div class="sk-circle7 sk-child"></div>
+            <div class="sk-circle8 sk-child"></div>
+            <div class="sk-circle9 sk-child"></div>
+            <div class="sk-circle10 sk-child"></div>
+            <div class="sk-circle11 sk-child"></div>
+            <div class="sk-circle12 sk-child"></div>
         </div>
-        <button id="SubmitRsvp" class="btn btn-primary btn-lg" onclick="@SubmitRSVP">Submit RSVP</button>
-
-    </div>
-
-    <div id="LoadingSpinner" class="sk-circle" style="display: none;">
-        <div class="sk-circle1 sk-child"></div>
-        <div class="sk-circle2 sk-child"></div>
-        <div class="sk-circle3 sk-child"></div>
-        <div class="sk-circle4 sk-child"></div>
-        <div class="sk-circle5 sk-child"></div>
-        <div class="sk-circle6 sk-child"></div>
-        <div class="sk-circle7 sk-child"></div>
-        <div class="sk-circle8 sk-child"></div>
-        <div class="sk-circle9 sk-child"></div>
-        <div class="sk-circle10 sk-child"></div>
-        <div class="sk-circle11 sk-child"></div>
-        <div class="sk-circle12 sk-child"></div>
-    </div>
+    </form>
 }
 
 @functions {
-    WeddingRSVP test = this;
     WeddingRSVP rsvp = new WeddingRSVP();
 
     protected override async Task OnInitAsync()
@@ -313,14 +313,14 @@ else
 
         if (isValid)
         {
-            await JSRuntime.Current.InvokeAsync<bool>("rsvpFunctions.showSpinner");
+           // await JSRuntime.Current.InvokeAsync<bool>("rsvpFunctions.showSpinner");
 
             var response = await Http.PostJsonAsync<WeddingRSVP>("api/RSVP", rsvp);
 
-            await JSRuntime.Current.InvokeAsync<bool>("rsvpFunctions.showSuccess");
+           // await JSRuntime.Current.InvokeAsync<bool>("rsvpFunctions.showSuccess");
         }
 
-        await JSRuntime.Current.InvokeAsync<bool>("rsvpFunctions.hideSpinner");
+       // await JSRuntime.Current.InvokeAsync<bool>("rsvpFunctions.hideSpinner");
     }
 
     public void AddPerson()

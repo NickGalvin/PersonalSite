@@ -44,11 +44,6 @@
         $('#LoadingSpinner').show();
     },
 
-    hideSpinner: function () {
-        $('#RsvpForm').show();
-        $('#LoadingSpinner').hide();
-    },
-
     showSuccess: function () {
         prompt('RSVP Submitted! See you at the reception!')
     },
@@ -59,66 +54,59 @@
     }
 }
 
-window.homeFunctions(){
-    LoadHome: function() {
+window.UpdateTimer = function () {
+
+    var weddingDate = new Date("2018-10-19T17:30").getTime();
+
+    if ($("#CountdownContainer").is(":visible")) {
+
+        var now = new Date().getTime();
+        var t = weddingDate - now;
+        var days = Math.floor(t / (1000 * 60 * 60 * 24));
+        var hours = Math.floor((t % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        var minutes = Math.floor((t % (1000 * 60 * 60)) / (1000 * 60));
+        var seconds = Math.floor((t % (1000 * 60)) / 1000);
+
+        if (seconds < 10) {
+            seconds = '0' + seconds;
+        }
+
+        var daysElement = document.getElementById('Days');
+        if (daysElement) {
+            daysElement.innerHTML = days;
+        }
+
+        var hoursElement = document.getElementById('Hours');
+        if (hoursElement) {
+            hoursElement.innerHTML = hours;
+        }
+
+        document.getElementById('Minutes').innerHTML = minutes;
+        document.getElementById('Seconds').innerHTML = seconds;
+
+        window.HideSpinner();
+    }
+}
+
+window.homeFunctions = {
+
+    LoadHome: function () {
         $('#DateTimeContainer').hide();
         document.body.style.overflow = 'hidden';
 
-        var weddingDate = new Date("2018-10-19T17:30").getTime();
+        window.countdown = setInterval(window.UpdateTimer, 1000);
 
-        var x = setInterval(function () {
+        $('#LoadingSpinner').fadeOut(2);
+        $('#DateTimeContainer').show();
+    },
+}
 
-            var now = new Date().getTime();
-            var t = weddingDate - now;
-            var days = Math.floor(t / (1000 * 60 * 60 * 24));
-            var hours = Math.floor((t % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            var minutes = Math.floor((t % (1000 * 60 * 60)) / (1000 * 60));
-            var seconds = Math.floor((t % (1000 * 60)) / 1000);
+window.StopCountdown = function () {
+    document.body.style.overflow = 'scroll';
+    clearInterval(window.countdown);
+}
 
-            if (seconds < 10) {
-                seconds = '0' + seconds;
-            }
-            //document.getElementById('Countdown').innerHTML =  `${days} : ${hours} : ${minutes} : ${seconds}`
-
-            document.getElementById('Days').innerHTML = days;
-            document.getElementById('Hours').innerHTML = hours;
-            document.getElementById('Minutes').innerHTML = minutes;
-            document.getElementById('Seconds').innerHTML = seconds;
-
-            $('#LoadingSpinner').fadeOut(2);
-            $('#DateTimeContainer').show();
-
-        }, 1000);
-
-        var showHome = function () {
-            document.body.style.overflow = 'hidden';
-
-            $('#HomeContainer').show();
-
-            $('#RegistryContainer').hide();
-            $('#WeddingDetailsContainer').hide();
-        }
-
-        var showRegistry = function () {
-            $('#RegistryContainer').show();
-
-            $('#HomeContainer').hide();
-            $('#WeddingDetailsContainer').hide();
-        };
-
-        var showDetails = function () {
-            document.body.style.overflow = 'scroll';
-            // $('#DetailsLinkContainer>a').addClass('selected');
-            // $('#RegistryLinkContainer>a').removeClass('selected');
-
-            $('#WeddingDetailsContainer').show();
-            $('#HomeContainer').hide();
-            $('#RegistryContainer').hide();
-        }
-
-        $(document).ready(function () {
-            $('#WeddingDetailsContainer').hide();
-            $('#RegistryContainer').hide();
-        });
-    }
+window.HideSpinner = function () {
+    //$('#LoadingSpinner').hide();
+    $('#LoadingSpinner').fadeOut(2);
 }

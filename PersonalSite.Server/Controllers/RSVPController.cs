@@ -9,8 +9,7 @@ using PersonalSite.Server.Services;
 
 namespace PersonalSite.Server.Controllers
 {
-    [Route("api/RSVP")]
-    [ApiController]
+    [Route("api/RSVP/")]
     public class RSVPController : ControllerBase
     {
         private RsvpService _rsvpService;
@@ -20,8 +19,8 @@ namespace PersonalSite.Server.Controllers
             _rsvpService = rsvpService;
         }
 
-        [HttpGet]
-        public IActionResult GetAllRSVP()
+        [HttpGet("[action]")]
+        public IActionResult List()
         {
             var rsvp = new List<WeddingRSVP>()
             {
@@ -45,30 +44,11 @@ namespace PersonalSite.Server.Controllers
                             Status = AttendenceStatus.Accept
                         },
                     }
-                },
-                new WeddingRSVP()
-                {
-                    Id = Guid.NewGuid().ToString("N"),
-                    RsvpDate = DateTime.Now.AddDays(-7),
-                    Comments = "Can't Wait!",
-                    Attendees = new List<WeddingAttendee>()
-                    {
-                        new WeddingAttendee()
-                        {
-                            Name = "Number Two",
-                            Status = AttendenceStatus.Accept
-                       },
-                        new WeddingAttendee()
-                        {
-                            Name = "Dr. Evil",
-                            Status = AttendenceStatus.Accept
-                        },
-                    }
-                },
+                }
             };
 
             //var allRsvp = _rsvpService.GetAllRSVP();
-            return Ok(rsvp);
+            return new JsonResult(rsvp);
         }
 
         [HttpPost]
@@ -94,12 +74,6 @@ namespace PersonalSite.Server.Controllers
         // PUT: api/RSVP/5
         [HttpPut("{id}")]
         public void Put(int id, [FromBody] string value)
-        {
-        }
-
-        // DELETE: api/ApiWithActions/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
         {
         }
     }
