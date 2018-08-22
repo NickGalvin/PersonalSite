@@ -28,6 +28,15 @@
     <script>
         window.StopCountdown();
         window.HideSpinner();
+
+        document.onload(function () {
+            if ($('#HomeContainer').is(":visible")) {
+                document.body.style.overflow = 'hidden';
+            }
+            else {
+                document.body.style.overflow = 'scroll';
+            }
+        })
     </script>
 </body>
 </html>

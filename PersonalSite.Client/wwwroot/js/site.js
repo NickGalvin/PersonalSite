@@ -86,6 +86,9 @@ window.UpdateTimer = function () {
 
         window.HideSpinner();
     }
+    else {
+        document.body.style.overflow = 'scroll';
+    }
 }
 
 window.homeFunctions = {

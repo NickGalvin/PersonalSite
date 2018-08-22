@@ -44,6 +44,27 @@ namespace PersonalSite.Server.Controllers
                             Status = AttendenceStatus.Accept
                         },
                     }
+                },
+                new WeddingRSVP()
+                {
+                    Id = Guid.NewGuid().ToString("N"),
+                    RsvpDate = DateTime.Now,
+                    Comments = "Please make sure there is plenty of steak and peanut butter otherwise Bentley will get furrrocious.",
+                    Attendees = new List<WeddingAttendee>()
+                    {
+                        new WeddingAttendee()
+                        {
+                            Name = "Bentley",
+                            DietaryRestrictions = "Steak and Peanut Butter",
+                            Status = AttendenceStatus.Accept
+                        },
+                        new WeddingAttendee()
+                        {
+                            Name = "Mandy",
+                            DietaryRestrictions = "Nick's Penis",
+                            Status = AttendenceStatus.Accept
+                        },
+                    }
                 }
             };
 
