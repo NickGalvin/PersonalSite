@@ -39,13 +39,22 @@
         })
     },
 
+    hideCircleSpinner: function () {
+        $('.circle-loader').show();
+        $('.success-message').hide();
+    },
+
     showSpinner: function () {
         $('#RsvpForm').hide();
-        $('#LoadingSpinner').show();
+        $('.circle-loader').show();
     },
 
     showSuccess: function () {
-        prompt('RSVP Submitted! See you at the reception!')
+        $('.circle-loader').toggleClass('load-complete');
+        $('.checkmark').toggle();
+        $('.success-message').show();
+
+       // prompt('RSVP Submitted! See you at the reception!')
     },
 
 

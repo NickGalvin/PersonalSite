@@ -80,7 +80,7 @@ namespace PersonalSite.Server.Controllers
                 rsvp.Id = Guid.NewGuid().ToString();
                 Response.Cookies.Append("RSVP", rsvp.Id);
 
-                return Ok(rsvp);
+                return Ok();
 
                 //_rsvpService.SaveRSVP(rsvp);
                 //return Ok();
