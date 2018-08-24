@@ -9,7 +9,6 @@
 <style>
 
     .rsvp-party {
-        margin: .5em 0;
         border: 1px solid black;
     }
 
@@ -21,30 +20,35 @@
         display: flex;
         justify-content:center;
         align-items:center;
+        text-align: center;
     }
 
     .column{
         flex-direction: column;
     }
 
-    .list-container>div>div{
-        margin: .25em 1em;
+    .list-container>div>div>div{
+        margin: 1.5em 1em;
         text-align: center;
     }
 
     .date{
-        width: 10%;
+        width: 10%
     }
 
     .name{
-        width: 30%;
-    }
-
-    .status{
         width: 20%;
     }
 
-    .comment{
+    .status{
+        width: 10%;
+    }
+
+    .dietary{
+        width: 30%;
+    }
+
+    .comment {
         width: 30%;
     }
 
@@ -54,36 +58,45 @@
 @if (rsvps == null)
 {
     <p><em>Loading...</em></p>
+    <LoadingSpinner/>
 }
 else
 {
     <h1>RSVPs for Nick and Mandy's Wedding Reception</h1>
 
     <div class="container-fluid list-container container">
-        <div class="header center">
-            <div class="date">RSVP Date</div>
-            <div class="name">Name</div>
-            <div class="status">Accept/Decline</div>
-            <div class="comment">Comment</div>
+        <div class="center row">
+            <div class="date col">RSVP Date</div>
+            <div class="name col">Name</div>
+            <div class="status col">Accept/Decline</div>
+            <div class="dietary col">Dietary Requirements</div>
+            <div class="comment col">Comment</div>
         </div>
         @foreach (var rsvp in rsvps)
         {
-            <div class="center rsvp-party">
-                <div class="date">@rsvp.RsvpDate.ToShortDateString()</div>
-                <div class="name">
-                    @foreach (var person in rsvp.Attendees)
-                    {
-                        <div class="center column">@person.Name</div>
-                    }
-                </div>
-                <div class="status">
-                    @foreach (var person in rsvp.Attendees)
-                    {
-                        <div class="center colum">@person.Status</div>
-                    }
-                </div>
-                <div class="comment">@rsvp.Comments</div>
+        <div class="center rsvp-party row">
+            <div class="date col">@rsvp.RsvpDate.ToShortDateString()</div>
+            <div class="name col">
+                @foreach (var person in rsvp.Attendees)
+                {
+                    <div class="center column">@person.Name</div>
+                }
             </div>
+            <div class="status col">
+                @foreach (var person in rsvp.Attendees)
+                {
+                    <div class="center colum">@person.Status</div>
+                }
+            </div>
+
+            <div class="dietary col">
+                @foreach (var person in rsvp.Attendees)
+                {
+                    <div class="center colum">@person.DietaryRestrictions</div>
+                }
+            </div>
+            <div class="comment col">@rsvp.Comments</div>
+        </div>
 
         }
     </div>
