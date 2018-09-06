@@ -1,5 +1,6 @@
 ﻿@using PersonalSite.Shared
 @using Microsoft.JSInterop;
+@using System.Threading;
 @page "/RSVP"
 @inherits BlazorLayoutComponent
 @inject HttpClient Http
@@ -43,118 +44,222 @@
     .error {
         outline: 1px solid red;
     }
+
+    body {
+        padding: 5em;
+        text-align: center;
+    }
+
+    h1 {
+        margin-bottom: 1em;
+    }
+
+    .circle-loader {
+        margin-bottom: 3.5em;
+        border: 1px solid rgba(0, 0, 0, 0.2);
+        border-left-color: #5cb85c;
+        animation: loader-spin 1.2s infinite linear;
+        position: relative;
+        display: inline-block;
+        vertical-align: top;
+        border-radius: 50%;
+        width: 7em;
+        height: 7em;
+    }
+
+    .load-complete {
+        -webkit-animation: none;
+        animation: none;
+        border-color: #5cb85c;
+        transition: border 500ms ease-out;
+    }
+
+    .checkmark {
+        display: none;
+    }
+
+        .checkmark.draw:after {
+            animation-duration: 800ms;
+            animation-timing-function: ease;
+            animation-name: checkmark;
+            transform: scaleX(-1) rotate(135deg);
+        }
+
+        .checkmark:after {
+            opacity: 1;
+            height: 3.5em;
+            width: 1.75em;
+            transform-origin: left top;
+            border-right: 3px solid #5cb85c;
+            border-top: 3px solid #5cb85c;
+            content: "";
+            left: 1.75em;
+            top: 3.5em;
+            position: absolute;
+        }
+
+    @@keyframes loader-spin {
+        0% {
+            transform: rotate(0deg);
+        }
+
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+
+    @@keyframes checkmark {
+        0% {
+            height: 0;
+            width: 0;
+            opacity: 1;
+        }
+
+        20% {
+            height: 0;
+            width: 1.75em;
+            opacity: 1;
+        }
+
+        40% {
+            height: 3.5em;
+            width: 1.75em;
+            opacity: 1;
+        }
+
+        100% {
+            height: 3.5em;
+            width: 1.75em;
+            opacity: 1;
+        }
+    }
 </style>
 @if (rsvp == null)
 {
     //<p><em>Loading...</em></p>
-    <LoadingSpinner/>
+    <LoadingSpinner />
 }
 else
 {
     <h1>RSVP for Nick and Mandy's Wedding Reception</h1>
-    <form>
-        <div id="RsvpForm" class="container-fluid">
-            @foreach (var person in rsvp.Attendees)
-            {
-                <div class="attendee container">
-                    <div class="attendee-form">
-                        <div class="attendee-info name-container form-group row">
-                            <label class="col-sm-4 col-xl-2 col-form-label col-form-label-sm name-label" for="@person.Name">Name</label>
-                            <div class="col-sm-8 col-xl-10 center column">
-                                <div class="name-message text-danger"></div>
-                                <input class="name form-control " bind="@person.Name" required type="text" />
-                            </div>
-                        </div>
-
-                        <div class="attendee-info restrictions form-group row">
-                            <label class="col-sm-4 col-xl-2 col-form-label col-form-label-sm" for="@person.DietaryRestrictions">Dietary Restrictions</label>
-                            <div class="col-sm-8 col-xl-10 center">
-                                <input class="diet-restrictions form-control" bind="@person.DietaryRestrictions" type="text" />
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label class="col-sm-4 col-xl-2 col-form-label col-form-label-sm" for="@person.Status">Reception Attendence</label>
-                            <div class="col-sm-8 col-xl-10 center column">
-                                <div class="attendance-message text-danger"></div>
-                                <select class="form-control attendance" bind="@person.Status" required>
-                                    <option value="" disabled selected>Are you able to attend?</option>
-                                    <option value="Accept">I'll Be There</option>
-                                    <option value="Decline">Can't Make It</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-
-                    @if (rsvp.Attendees.Count > 1 && rsvp.Attendees.Last() != person)
-                    {
-                        <div class="line"></div>
-                    }
-
-                </div>
-            }
-
-            <div id="button-container form-group">
-                <button id="AddPerson" class="btn btn-secondary" onclick="@AddPerson">Add Person</button>
-
-                @if (rsvp.Attendees.Count > 1)
+    @if (!submittingRsvp)
+    {
+        <form>
+            <div id="RsvpForm" class="container-fluid">
+                @foreach (var person in rsvp.Attendees)
                 {
-                    <button class="btn btn-secondary" onclick="@RemovePerson">Remove Person</button>
+                    <div class="attendee container">
+                        <div class="attendee-form">
+                            <div class="attendee-info name-container form-group row">
+                                <label class="col-sm-4 col-xl-2 col-form-label col-form-label-sm name-label" for="@person.Name">Name</label>
+                                <div class="col-sm-8 col-xl-10 center column">
+                                    <div class="name-message text-danger"></div>
+                                    <input class="name form-control " bind="@person.Name" required type="text" />
+                                </div>
+                            </div>
+
+                            <div class="attendee-info restrictions form-group row">
+                                <label class="col-sm-4 col-xl-2 col-form-label col-form-label-sm" for="@person.DietaryRestrictions">Dietary Restrictions</label>
+                                <div class="col-sm-8 col-xl-10 center">
+                                    <input class="diet-restrictions form-control" bind="@person.DietaryRestrictions" type="text" />
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-sm-4 col-xl-2 col-form-label col-form-label-sm" for="@person.Status">Reception Attendence</label>
+                                <div class="col-sm-8 col-xl-10 center column">
+                                    <div class="attendance-message text-danger"></div>
+                                    <select class="form-control attendance" bind="@person.Status" required>
+                                        <option value="" disabled selected>Are you able to attend?</option>
+                                        <option value="Accept">I'll Be There</option>
+                                        <option value="Decline">Can't Make It</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        @if (rsvp.Attendees.Count > 1 && rsvp.Attendees.Last() != person)
+                        {
+                            <div class="line"></div>
+                        }
+
+                    </div>
                 }
-            </div>
 
-            <div class="form-group comment-container">
-                <label for="Comments">Comments</label>
-                <textarea id="Comments" class="form-control" bind="@rsvp.Comments"></textarea>
-            </div>
-            <button id="SubmitRsvp" class="btn btn-primary btn-lg" onclick="@SubmitRSVP">Submit RSVP</button>
+                <div id="button-container form-group">
+                    <button id="AddPerson" class="btn btn-secondary" onclick="@AddPerson">Add Person</button>
 
-        </div>
-
-        @if (submittingRsvp)
-        {
-            @if (!submitComplete)
-            {
-                <div class="circle-loader"></div>
-            }
-            else
-            {
-                <div class="circle-loader load-complete">
-                    <div class="checkmark draw"></div>
+                    @if (rsvp.Attendees.Count > 1)
+                    {
+                        <button class="btn btn-secondary" onclick="@RemovePerson">Remove Person</button>
+                    }
                 </div>
-                <div class="border border-success success-message">RSVP Submitted Successfully!</div>
-            }
-        }
 
-    </form>
+                <div class="form-group comment-container">
+                    <label for="Comments">Comments</label>
+                    <textarea id="Comments" class="form-control" bind="@rsvp.Comments"></textarea>
+                </div>
+                <button id="SubmitRsvp" class="btn btn-primary btn-lg" onclick="@SubmitRSVP">Submit RSVP</button>
+
+            </div>
+
+        </form>
+    }
+    else
+    {
+        @if (!submitComplete)
+        {
+            <div class="circle-loader"></div>
+            <div>TEST SUBMITTING</div>
+
+        }
+        else
+        {
+            <div class="circle-loader load-complete">
+                <div class="checkmark draw"></div>
+            </div>
+
+            <div class="success-message">RSVP Submitted Successfully!</div>
+        }
+    }
 }
 
 @functions {
     WeddingRSVP rsvp = new WeddingRSVP();
-    bool submittingRsvp = false;
-    bool submitComplete = false;
+    public bool submittingRsvp { get; set; } = false;
+    public bool submitComplete { get; set; } = false;
 
     protected override async Task OnInitAsync()
     {
-        await JSRuntime.Current.InvokeAsync<bool>("rsvpFunctions.hideCircleSpinner");
+        submittingRsvp = false;
     }
 
     public async void SubmitRSVP()
     {
+        submittingRsvp = true;
+        StateHasChanged();
 
-        bool isValid = await JSRuntime.Current.InvokeAsync<bool>("rsvpFunctions.validateRsvp");
+        //await Http.PostJsonAsync<WeddingRSVP>("api/RSVP", rsvp);
+        Thread.Sleep(5000);
+        submitComplete = true;
 
-        if (isValid)
-        {
-            // await JSRuntime.Current.InvokeAsync<bool>("rsvpFunctions.showSpinner");
-            submittingRsvp = true;
+        StateHasChanged();
 
-            await Http.PostJsonAsync<WeddingRSVP>("api/RSVP", rsvp);
+        //bool isValid = await JSRuntime.Current.InvokeAsync<bool>("rsvpFunctions.validateRsvp");
 
-            submitComplete = true;
+        //if (isValid)
+        //{
+        //    // await JSRuntime.Current.InvokeAsync<bool>("rsvpFunctions.showSpinner");
+        //    submittingRsvp = true;
+        //    StateHasChanged();
+        //    Thread.Sleep(1000);
+        //    //await Http.PostJsonAsync<WeddingRSVP>("api/RSVP", rsvp);
 
-            // await JSRuntime.Current.InvokeAsync<bool>("rsvpFunctions.showSuccess");
-        }
+        //    submitComplete = true;
+        //    StateHasChanged();
+
+        //    // await JSRuntime.Current.InvokeAsync<bool>("rsvpFunctions.showSuccess");
+        //}
 
         // await JSRuntime.Current.InvokeAsync<bool>("rsvpFunctions.hideSpinner");
     }
