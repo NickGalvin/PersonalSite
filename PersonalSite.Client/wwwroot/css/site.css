@@ -6,6 +6,7 @@
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
+    color: white;
 }
 
 h1, h2, h3 {
@@ -310,6 +311,11 @@ footer {
   REGISTRY PAGE
 ***************/
 
+#RsvpForm {
+    background-color: transparent;
+    color: white;
+}
+
 #RegistryContainer {
     display: flex;
     flex-direction: column;
@@ -346,6 +352,8 @@ footer {
 
     .attendee{
         margin: 2em 0;
+        background-color: transparent;
+
     }
 
     .attendee-info {
@@ -449,4 +457,14 @@ $check-color: $brand-success;
         width: $check-width;
         opacity: 1;
     }
+}
+
+footer a {
+    text-decoration: none;
+    color: black;
+}
+
+footer a:hover {
+    text-decoration: none;
+    color: black;
 }

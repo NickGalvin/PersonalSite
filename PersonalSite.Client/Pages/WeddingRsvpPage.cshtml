@@ -10,7 +10,15 @@
 
 <style>
 
+    h1{
+        color: white;
+        padding: 1em 0;
+        margin: .5em 0;
+    }
 
+    #RsvpPageContainer{
+        margin-top: 2em;
+    }
     #RsvpForm {
         width: 50%;
     }
@@ -43,6 +51,7 @@
     .error {
         outline: 1px solid red;
     }
+
 </style>
 <div id="RsvpPageContainer" class="navy-background">
     @if (rsvp == null)
@@ -60,7 +69,7 @@
                     <div class="attendee card">
                         <div class="attendee-form">
                             <div class="attendee-info name-container form-group row">
-                                <label class="col-sm-4 col-xl-2 col-form-label col-form-label-sm name-label" for="@person.Name">Name</label>
+                                <label class="col-sm-4 col-xl-2 col-form-label col-form-label-lg name-label" for="@person.Name">Name</label>
                                 <div class="col-sm-8 col-xl-10 center column">
                                     <div class="name-message text-danger"></div>
                                     <input class="name form-control " bind="@person.Name" required type="text" />
@@ -68,14 +77,14 @@
                             </div>
 
                             <div class="attendee-info restrictions form-group row">
-                                <label class="col-sm-4 col-xl-2 col-form-label col-form-label-sm" for="@person.DietaryRestrictions">Dietary Restrictions</label>
+                                <label class="col-sm-4 col-xl-2 col-form-label col-form-label-lg" for="@person.DietaryRestrictions">Dietary Restrictions</label>
                                 <div class="col-sm-8 col-xl-10 center">
                                     <input class="diet-restrictions form-control" bind="@person.DietaryRestrictions" type="text" />
                                 </div>
                             </div>
 
                             <div class="form-group row">
-                                <label class="col-sm-4 col-xl-2 col-form-label col-form-label-sm" for="@person.Status">Reception Attendence</label>
+                                <label class="col-sm-4 col-xl-2 col-form-label col-form-label-lg" for="@person.Status">Reception Attendence</label>
                                 <div class="col-sm-8 col-xl-10 center column">
                                     <div class="attendance-message text-danger"></div>
                                     <select class="form-control attendance" bind="@person.Status" required>
