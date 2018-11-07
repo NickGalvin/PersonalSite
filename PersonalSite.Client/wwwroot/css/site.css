@@ -1,5 +1,14 @@
 ﻿@import url('open-iconic/font/css/open-iconic-bootstrap.min.css');
 
+.navy-background {
+    background: url(https://s3.us-east-2.amazonaws.com/nickandmandygalvin.com/Images/NavyBackground.jpg) no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    color: white;
+}
+
 h1, h2, h3 {
     font-family: 'muli', sans-serif;
     text-align: center;
@@ -302,6 +311,11 @@ footer {
   REGISTRY PAGE
 ***************/
 
+#RsvpForm {
+    background-color: transparent;
+    color: white;
+}
+
 #RegistryContainer {
     display: flex;
     flex-direction: column;
@@ -338,6 +352,8 @@ footer {
 
     .attendee{
         margin: 2em 0;
+        background-color: transparent;
+
     }
 
     .attendee-info {

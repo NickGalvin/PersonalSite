@@ -11,7 +11,15 @@
 
 <style>
 
+    h1{
+        color: white;
+        padding: 1em 0;
+        margin: .5em 0;
+    }
 
+    #RsvpPageContainer{
+        margin-top: 2em;
+    }
     #RsvpForm {
         width: 50%;
     }
@@ -158,14 +166,14 @@ else
                             </div>
 
                             <div class="attendee-info restrictions form-group row">
-                                <label class="col-sm-4 col-xl-2 col-form-label col-form-label-sm" for="@person.DietaryRestrictions">Dietary Restrictions</label>
+                                <label class="col-sm-4 col-xl-2 col-form-label col-form-label-lg" for="@person.DietaryRestrictions">Dietary Restrictions</label>
                                 <div class="col-sm-8 col-xl-10 center">
                                     <input class="diet-restrictions form-control" bind="@person.DietaryRestrictions" type="text" />
                                 </div>
                             </div>
 
                             <div class="form-group row">
-                                <label class="col-sm-4 col-xl-2 col-form-label col-form-label-sm" for="@person.Status">Reception Attendence</label>
+                                <label class="col-sm-4 col-xl-2 col-form-label col-form-label-lg" for="@person.Status">Reception Attendence</label>
                                 <div class="col-sm-8 col-xl-10 center column">
                                     <div class="attendance-message text-danger"></div>
                                     <select class="form-control attendance" bind="@person.Status" required>
@@ -257,19 +265,19 @@ else
         //    // await JSRuntime.Current.InvokeAsync<bool>("rsvpFunctions.showSuccess");
         //}
 
-        // await JSRuntime.Current.InvokeAsync<bool>("rsvpFunctions.hideSpinner");
-    }
+    // await JSRuntime.Current.InvokeAsync<bool>("rsvpFunctions.hideSpinner");
+}
 
-    public void AddPerson()
-    {
-        this.rsvp.Attendees.Add(new WeddingAttendee());
-    }
+public void AddPerson()
+{
+    this.rsvp.Attendees.Add(new WeddingAttendee());
+}
 
-    public void RemovePerson()
-    {
-        var last = rsvp.Attendees.Last();
-        this.rsvp.Attendees.Remove(last);
-    }
+public void RemovePerson()
+{
+    var last = rsvp.Attendees.Last();
+    this.rsvp.Attendees.Remove(last);
+}
 
 
 }
