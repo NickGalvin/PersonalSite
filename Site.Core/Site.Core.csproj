@@ -10,4 +10,8 @@
     <PackageReference Include="AWSSDK.S3" Version="3.3.26.5" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\PersonalSite.Server\PersonalSite.Server.csproj" />
+  </ItemGroup>
+
 </Project>
