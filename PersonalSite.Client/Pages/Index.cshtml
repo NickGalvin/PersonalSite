@@ -54,11 +54,10 @@
             </div>
         </div>
         <div id="image-text-container">
-            <div class="getting-married">We're Getting Married!</div>
+            <div class="getting-married">We Got Married!</div>
             <div class="wedding-date">Friday, October 19th 2018</div>
-            <a class="center column" href="http://nickandmandygalvin.rsvpify.com" target="_blank" rel="noopener noreferrer">
-                <button id="RSVPButton" class="grow button btn">RSVP</button>
-            </a>
+            <input type="file" onchange="@UploadFile" id="fileUpload" />
+
         </div>
     </div>
 </div>
@@ -68,5 +67,12 @@
     protected override async Task OnInitAsync()
     {
         await JSRuntime.Current.InvokeAsync<bool>("homeFunctions.LoadHome");
+    }
+
+    async Task UploadFile()
+    {
+        var data = await JsInterop.GetFileData("fileUpload");
+        var response = await Http.PostAsync("/api/upload", new ByteArrayContent(Convert.FromBase64String(data)));
+        var fileTempName = await response.Content.ReadAsStringAsync();
     }
 }

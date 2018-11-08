@@ -13,5 +13,8 @@ namespace PersonalSite.Server
     public class AWSConfig
     {
         public string S3_Bucket { get; set; }
+        public string ProfileName { get; set; }
+        public string AccessKey { get; set; }
+        public string SecretKey { get; set; }
     }
 }
