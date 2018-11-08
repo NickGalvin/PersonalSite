@@ -76,7 +76,7 @@ footer {
 }
 
 .underline {
-    border-top: 3px solid rgba(0,0,0, 60%);
+    border-top: 3px solid white);
     width: 100%;
     margin: 0 auto;
     z-index: 9999;
@@ -249,106 +249,11 @@ footer {
     font-family: 'Great Vibes', cursive;
 }
 
-/**************
-    DETAILS PAGE
-***************/
-
-
-#Details {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-
-.description {
-    margin: 1em .75em;
-    font-family: 'muli', sans-serif;
-    font-size: 2em;
-}
-
-.directions-container {
-    padding: 1em;
-}
-
-.place {
-    text-align: center;
-    margin-top: 3em;
-    padding: 1em 3em;
-}
-
-.important {
-    font-weight: bold;
-}
-
-.directions-link {
-    font-size: 1.5em;
-    margin: 1em 0;
-    color: black;
-    background-color: no;
-}
-
-    .directions-link:hover {
-        color: black;
-    }
-
-    .directions-link img {
-        height: 25px;
-        width: auto;
-    }
-
-#DirectionsContainer {
-    margin-top: 10em;
-}
-
-@media only screen and (max-width: 600px) {
-    .place {
-        padding: 0;
-    }
-}
-
-/**************
-  REGISTRY PAGE
-***************/
-
 #RsvpForm {
     background-color: transparent;
     color: white;
 }
 
-#RegistryContainer {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin-top: 8em;
-}
-
-    #RegistryContainer .underline {
-        width: 50%;
-    }
-
-.registry-description {
-    margin-top: 1em;
-    font-size: 2em;
-    width: 50%;
-    text-align: center;
-    font-family: 'muli', sans-serif;
-}
-
-#RegistryLinksContainer {
-    justify-content: center;
-    align-items: center;
-    display: flex;
-}
-
-.registryLinkContainer {
-    padding: 5em;
-}
-
-    .registryLinkContainer img {
-        max-height: 300px;
-    }
 
     .attendee{
         margin: 2em 0;

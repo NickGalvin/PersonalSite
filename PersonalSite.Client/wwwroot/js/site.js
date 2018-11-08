@@ -50,13 +50,16 @@
     },
 
     showSuccess: function () {
-        $('.circle-loader').toggleClass('load-complete');
+        //$('.circle-loader').toggleClass('load-complete');
         $('.checkmark').toggle();
         $('.success-message').show();
 
        // prompt('RSVP Submitted! See you at the reception!')
     },
 
+    toggleCheckmark: function () {
+        $('.checkmark').toggle();
+    },
 
     initializeTable: function () {
         $('#RsvpTable').DataTable();
