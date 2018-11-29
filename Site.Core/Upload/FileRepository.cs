@@ -23,7 +23,6 @@ namespace Site.Core.Upload
         {
             var uploader = new TransferUtility(_s3Client);
             await uploader.UploadAsync(filePath, _config.AWS.S3_Bucket);
-
         }
     }
 }

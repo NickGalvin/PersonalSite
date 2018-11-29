@@ -25,6 +25,9 @@
     <Content Update="Shared\LoadingSpinner.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
+    <Content Update="Shared\FileUpload.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
     <Content Update="Shared\SubmitSuccessSpinner.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>

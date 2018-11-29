@@ -1,0 +1,22 @@
+﻿<style>
+
+    .nav{
+        text-transform:uppercase;
+    }
+
+</style>
+
+<div class="row file-upload">
+    <div>
+        <input type="file"  autocomplete="on" class="file-input"/>
+    </div>
+</div>
+
+@functions {
+    bool collapseNavMenu = true;
+
+    void ToggleNavMenu()
+    {
+        collapseNavMenu = !collapseNavMenu;
+    }
+}
