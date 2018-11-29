@@ -1,0 +1,19 @@
+﻿@using PersonalSite.Shared
+@using Microsoft.JSInterop;
+@inherits BlazorLayoutComponent
+@inject HttpClient Http
+
+@page "/Login"
+
+<div>
+
+</div>
+@functions{
+
+    User user;
+
+    public async Task<bool> Login()
+    {
+        return await Http.PostJsonAsync<bool>("api/login", user);
+    }
+}
