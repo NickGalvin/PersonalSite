@@ -1,6 +1,47 @@
 ﻿@page "/Registry"
 
-<div id="RegistryContainer" class="center contianer-fluid class="navy-background"">
+<style>
+
+/**************
+  REGISTRY PAGE
+***************/
+
+
+    #RegistryContainer {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin-top: 8em;
+    }
+
+        #RegistryContainer .underline {
+            width: 50%;
+        }
+
+    .registry-description {
+        margin-top: 1em;
+        font-size: 2em;
+        width: 50%;
+        text-align: center;
+        font-family: 'muli', sans-serif;
+    }
+
+    #RegistryLinksContainer {
+        justify-content: center;
+        align-items: center;
+        display: flex;
+    }
+
+    .registryLinkContainer {
+        padding: 5em;
+    }
+
+        .registryLinkContainer img {
+            max-height: 300px;
+        }
+</style>
+<div id="RegistryContainer" class="center contianer-fluid navy-background">
     <h1>Registry</h1>
     <div class="underline"></div>
     <div class="registry-description center">Your presence at our Wedding is the greatest gift of all. However, if you would like to bring a gift, we have registered with Amazon and Target.</div>
