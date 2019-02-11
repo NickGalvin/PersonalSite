@@ -2,6 +2,7 @@
 @using Microsoft.JSInterop;
 @using System.Threading;
 @using System.Timers;
+@inject HttpClient Http;
 
 @page "/"
 
@@ -71,7 +72,7 @@
 
     async Task UploadFile()
     {
-        var data = await JsInterop.GetFileData("fileUpload");
+        var data = await JSRuntime.Current.InvokeAsync<string>("GetFileData(fileUpload)");
         var response = await Http.PostAsync("/api/upload", new ByteArrayContent(Convert.FromBase64String(data)));
         var fileTempName = await response.Content.ReadAsStringAsync();
     }

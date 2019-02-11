@@ -8,12 +8,13 @@ using System.Threading.Tasks;
 
 namespace PersonalSite.Server.Data
 {
-    public class UserDbContext : DbContext
+    public class PersonalSiteDbContext : DbContext
     {
-        public UserDbContext(DbContextOptions options) : base(options)
+        public PersonalSiteDbContext(DbContextOptions options) : base(options)
         {
         }
 
         public DbSet<User> Users { get; set; }
+        public DbSet<Inquiry> Inquiries { get; set; }
     }
 }

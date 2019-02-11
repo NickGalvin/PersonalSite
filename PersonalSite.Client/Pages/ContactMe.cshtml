@@ -1,0 +1,56 @@
+﻿@using PersonalSite.Shared
+@using Microsoft.JSInterop;
+@inherits BlazorLayoutComponent
+@inject HttpClient Http
+
+@page "/ContactMe"
+
+@if(string.IsNullOrEmpty(inquiry.Id))
+{
+
+<div style="width:50%;margin:0 auto;">
+    <div>
+        <div class="form-group">
+            <label for="Name">Name</label>
+            <input type="text" id="Name" class="form-control" bind="@inquiry.Name" required />
+        </div>
+
+        <div class="form-group">
+            <label for="Subject">Subject</label>
+            <input type="text" id="Subject" class="form-control" bind="@inquiry.Subject" required />
+        </div>
+
+        <div class="form-group">
+            <label for="Message">Message</label>
+            <textarea id="Message" class="form-control" bind="@inquiry.Message" required />
+        </div>
+
+        <div class="form-group">
+            <label for="Email">Email</label>
+            <input type="text" id="Email" class="form-control" bind="@inquiry.Email" required/>
+        </div>
+
+        <div class="form-group">
+            <label for="Phone">Phone</label>
+            <input type="text" id="Phone" class="form-control" bind="@inquiry.Phone" />
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary" onclick="@SubmitInquiry">Submit</button>
+</div>
+}
+else{
+    <div>Submitted! Inquiry ID: @inquiry.Id</div>
+}
+
+@functions{
+
+    Inquiry inquiry = new Inquiry();
+
+    public async Task<Inquiry> SubmitInquiry()
+    {
+        inquiry = await Http.PostJsonAsync<Inquiry>("api/inquiry/SubmitInquiry", inquiry);
+
+        return inquiry;
+    }
+}
