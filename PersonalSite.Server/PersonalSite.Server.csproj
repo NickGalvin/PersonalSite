@@ -9,10 +9,13 @@
     <PackageReference Include="AWSSDK.Extensions.NETCore.Setup" Version="3.3.6" />
     <PackageReference Include="AWSSDK.S3" Version="3.3.26.10" />
     <PackageReference Include="BCrypt-Official" Version="0.1.109" />
+    <PackageReference Include="Braintree" Version="4.8.0" />
     <PackageReference Include="Hangfire" Version="1.6.21" />
+    <PackageReference Include="Microsoft.AspNet.WebApi.Core" Version="5.2.7" />
     <PackageReference Include="Microsoft.AspNetCore.App" Version="2.1.5" />
     <PackageReference Include="Microsoft.AspNetCore.Blazor.Server" Version="0.6.0" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.5" />
+    <PackageReference Include="PayPal" Version="1.9.1" />
     <PackageReference Include="System.ComponentModel" Version="4.3.0" />
   </ItemGroup>
 

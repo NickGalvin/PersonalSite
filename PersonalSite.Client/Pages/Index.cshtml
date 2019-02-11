@@ -1,78 +1,68 @@
 ﻿@using PersonalSite.Shared
-@using Microsoft.JSInterop;
-@using System.Threading;
-@using System.Timers;
+@using PersonalSite.Shared.Auth
+@using Microsoft.JSInterop
+@using System.Threading
+@using System.Timers
+@inject HttpClient Http
+@inject AppState AppState
+@inject Microsoft.AspNetCore.Blazor.Services.IUriHelper uri
 
 @page "/"
 
-<div id="HomeContainer" class="">
-    <div id="ImageContainer">
-        <div id="image-text-container-1">
-            <div id="Hashtag">#GoingGalvin</div>
-            <div id="CountdownContainer">
-                <div id="LoadingSpinner" class="sk-circle">
-                    <div class="sk-circle1 sk-child"></div>
-                    <div class="sk-circle2 sk-child"></div>
-                    <div class="sk-circle3 sk-child"></div>
-                    <div class="sk-circle4 sk-child"></div>
-                    <div class="sk-circle5 sk-child"></div>
-                    <div class="sk-circle6 sk-child"></div>
-                    <div class="sk-circle7 sk-child"></div>
-                    <div class="sk-circle8 sk-child"></div>
-                    <div class="sk-circle9 sk-child"></div>
-                    <div class="sk-circle10 sk-child"></div>
-                    <div class="sk-circle11 sk-child"></div>
-                    <div class="sk-circle12 sk-child"></div>
-                </div>
+<div id="HomeContainer" class="container-fluid">
 
-                <div id="DateTimeContainer">
-                    <div id="DaysContainer">
-                        <div id="Days" class="time"></div>
-                        <div class="time-text">Days</div>
+@if (AppState.Profile != null)
+{
+    <div>Hi, @AppState.Profile.FirstName!</div>
+}
+    <div id="Slideshow" class="carousel slide" data-ride="carousel">
+        @if (slideshowImages == null)
+        {
+            <LoadingSpinner />
+        }
+        else
+        {
+            <div class="carousel-inner">
+                @foreach (var imageUrl in slideshowImages)
+                {
+                    <div class="carousel-item  @(slideshowImages.IndexOf(imageUrl) == 0 ? "active" : string.Empty)">
+                        <img class="d-block w-100" src="@imageUrl" alt="slide">
                     </div>
+                }
 
-                    <div id="HoursContainer" class="time">
-                        <div id="Hours"></div>
-                        <div class="time-text">Hours</div>
-                    </div>
-
-
-                    <div class="separator">:</div>
-
-                    <div id="MinutesContainer" class="time">
-                        <div id="Minutes"></div>
-                        <div class="time-text">Minutes</div>
-                    </div>
-
-                    <div class="separator">:</div>
-
-                    <div id="SecondsContainer" class="time">
-                        <div id="Seconds"></div>
-                        <div class="time-text">Seconds</div>
-                    </div>
-                </div>
+                <a class="carousel-control-prev" href="#Slideshow" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#Slideshow" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
             </div>
-        </div>
-        <div id="image-text-container">
-            <div class="getting-married">We Got Married!</div>
-            <div class="wedding-date">Friday, October 19th 2018</div>
-            <input type="file" onchange="@UploadFile" id="fileUpload" />
+        }
 
-        </div>
     </div>
 </div>
 
 @functions {
 
+    List<string> slideshowImages;
+
+
     protected override async Task OnInitAsync()
     {
-        await JSRuntime.Current.InvokeAsync<bool>("homeFunctions.LoadHome");
+        slideshowImages = await Http.GetJsonAsync<List<string>>("/api/file/slideshow");
+        System.Console.WriteLine(string.Join(", ", slideshowImages));
+        await JSRuntime.Current.InvokeAsync<string>("homeFunctions.initializeSlideshow");
     }
 
-    async Task UploadFile()
+
+
+
+    async Task<string> UploadFile()
     {
         var data = await JSRuntime.Current.InvokeAsync<string>("window.GetFileData");
         var response = await Http.PostAsync("/api/upload", new ByteArrayContent(Convert.FromBase64String(data)));
-        var fileTempName = await response.Content.ReadAsStringAsync();
+        return await response.Content.ReadAsStringAsync();
     }
 }

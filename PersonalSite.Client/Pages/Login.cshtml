@@ -1,19 +1,52 @@
-﻿@using PersonalSite.Shared
+﻿@using PersonalSite.Shared.Auth
 @using Microsoft.JSInterop;
 @inherits BlazorLayoutComponent
 @inject HttpClient Http
-
+@inject Microsoft.AspNetCore.Blazor.Services.IUriHelper uri
+@inject AppState AppState
 @page "/Login"
 
-<div>
+<div id="login-container" class="container">
 
+    @if (!success)
+    {
+
+    <form>
+        <div class="form-group">
+            <label for="username">Username</label>
+            <input type="text" bind=@authRequest.Username class="form-control" id="username" aria-describedby="emailHelp" placeholder="Enter email" />
+            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+        </div>
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" bind=@authRequest.ProvidedPassword class="form-control" id="password" placeholder="Password" />
+        </div>
+        <button type="button" class="btn btn-primary" onclick=@Authenticate>Submit</button>
+    </form>
+    }
+    else
+    {
+        <div>You're logged in! Your JWT is: @response.Token</div>
+    }
 </div>
+
 @functions{
 
-    User user;
+    AuthenticationRequest authRequest = new AuthenticationRequest();
+    AuthenticateResponse response;
+    bool success = false;
 
-    public async Task<bool> Login()
+    public async Task Authenticate()
     {
-        return await Http.PostJsonAsync<bool>("api/login", user);
+        response = await Http.PostJsonAsync<AuthenticateResponse>("api/user/authenticate", authRequest);
+        if (!string.IsNullOrEmpty(response?.Token))
+        {
+            Http.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", response.Token);
+            await JSRuntime.Current.InvokeAsync<string>("auth.storeAccessToken", response.Token);
+            success = true;
+            AppState.Profile = response.Profile;
+        }
+
+        //uri.NavigateTo("/");
     }
 }

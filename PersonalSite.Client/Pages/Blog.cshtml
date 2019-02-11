@@ -1,0 +1,75 @@
+﻿@using PersonalSite.Shared.Blog
+@using Microsoft.JSInterop;
+@inherits BlazorLayoutComponent
+@inject HttpClient Http
+
+@page "/Blog"
+
+<div>
+    <div class="new-post mb-5 w-50 justify-content-center align-items-center flex-column">
+        <div class="form-group">
+            <label class="form-label">Title</label>
+            <input class="form-control" value="@newPost.Title" required/>
+        </div>
+        <div class="form-group">
+            <label class="form-label">Content</label>
+            <textarea class="form-control" value="@newPost.Content" required/>
+        </div>
+        <button type="button" onclick="SubmitPost();">Submit</button>
+    </div>
+    @if (!posts.Any())
+    {
+        <LoadingSpinner />
+    }
+    else
+    {
+        <div class="post-list d-flex justify-content-center align-items-center flex-column border">
+            @foreach (var post in posts)
+            {
+            <div class="post card m-3 w-50">
+                <div class="post-header card-header">
+                    <button type="button" onclick="@(() => DeletePost(post))" class="close" aria-label="Delete Post @post.Title">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <img src="@post.ImageUrl" class="card-img-top" alt="@post.ImageAltText">
+                <div class="post-body card-body">
+                    <h3 class="card-title">@post.Title</h3>
+                    <p class="card-text">@post.Content</p>
+                </div>
+                <div class="post-footer">
+                </div>
+            </div>
+            }
+        </div>
+       
+    }
+</div>
+
+@functions{
+    Post newPost = new Post();
+
+    List<Post> posts = new List<Post>();
+    protected override async Task OnInitAsync()
+    {
+        await GetPosts();
+    }
+
+    public async Task GetPosts()
+    {
+        posts = await Http.GetJsonAsync<List<Post>>("api/user/posts");
+    }
+
+    public async Task SubmitPost()
+    {
+        var createdPost = await Http.PostJsonAsync<Post>("api/user/posts", newPost);
+        posts.Add(createdPost);
+        newPost = new Post();
+    }
+
+    public async Task DeletePost(Post post)
+    {
+        posts.Remove(post);
+        await Http.DeleteAsync($"api/user/posts/{post.Id}");
+    }
+}

@@ -1,6 +1,7 @@
 ﻿using JetBrains.Annotations;
 using Microsoft.EntityFrameworkCore;
 using PersonalSite.Shared;
+using PersonalSite.Shared.Auth;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace PersonalSite.Server.Data
 {
-    public class UserDbContext : DbContext
+    public class SiteDbContext : DbContext
     {
-        public UserDbContext(DbContextOptions options) : base(options)
+        public SiteDbContext(DbContextOptions options) : base(options)
         {
         }
 

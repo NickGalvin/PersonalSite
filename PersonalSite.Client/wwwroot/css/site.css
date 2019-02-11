@@ -1,28 +1,11 @@
 ﻿@import url('open-iconic/font/css/open-iconic-bootstrap.min.css');
 
-.navy-background {
-    background: url(https://s3.us-east-2.amazonaws.com/nickandmandygalvin.com/Images/NavyBackground.jpg) no-repeat center center fixed;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
-    color: white;
-}
+/* Posts */
 
-h1, h2, h3 {
-    font-family: 'muli', sans-serif;
-    text-align: center;
-    font-size: 3em;
-}
+.post
 
-h2 {
-    font-family: 'Lobster', cursive;
-    font-size: 5em;
-}
 
-#WeddingDetailsContainer {
-    margin: 3px;
-}
+
 
 .grow {
     transition: all .2s ease-in-out;

@@ -6,96 +6,58 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using PersonalSite.Shared;
 using PersonalSite.Server.Services;
+using PersonalSite.Shared.Auth;
+using PersonalSite.Shared.Blog;
+using Microsoft.AspNetCore.Authorization;
 
 namespace PersonalSite.Server.Controllers
 {
-    [Route("api/RSVP/")]
+    [Route("api/User")]
     public class UserController : ControllerBase
     {
-        private RsvpService _rsvpService;
+        private UserService _user;
 
-        public UserController(RsvpService rsvpService)
+        public UserController(UserService user)
         {
-            _rsvpService = rsvpService;
+            _user = user;
         }
 
-        [HttpGet("[action]")]
-        public IActionResult List()
+        [HttpGet]
+        public IActionResult GetUser()
         {
-            var rsvp = new List<WeddingRSVP>()
-            {
-                new WeddingRSVP()
-                {
-                    Id = Guid.NewGuid().ToString("N"),
-                    RsvpDate = DateTime.Now,
-                    Comments = "Please make sure there is plenty of steak and peanut butter otherwise Bentley will get furrrocious.",
-                    Attendees = new List<WeddingAttendee>()
-                    {
-                        new WeddingAttendee()
-                        {
-                            Name = "Bentley",
-                            DietaryRestrictions = "Steak and Peanut Butter",
-                            Status = AttendenceStatus.Accept
-                        },
-                        new WeddingAttendee()
-                        {
-                            Name = "Mandy",
-                            DietaryRestrictions = "Nick's Penis",
-                            Status = AttendenceStatus.Accept
-                        },
-                    }
-                },
-                new WeddingRSVP()
-                {
-                    Id = Guid.NewGuid().ToString("N"),
-                    RsvpDate = DateTime.Now,
-                    Comments = "Please make sure there is plenty of steak and peanut butter otherwise Bentley will get furrrocious.",
-                    Attendees = new List<WeddingAttendee>()
-                    {
-                        new WeddingAttendee()
-                        {
-                            Name = "Bentley",
-                            DietaryRestrictions = "Steak and Peanut Butter",
-                            Status = AttendenceStatus.Accept
-                        },
-                        new WeddingAttendee()
-                        {
-                            Name = "Mandy",
-                            DietaryRestrictions = "Nick's Penis",
-                            Status = AttendenceStatus.Accept
-                        },
-                    }
-                }
-            };
+            var user = _user.GetUser();
+            return Ok(user);
+        }
 
-            //var allRsvp = _rsvpService.GetAllRSVP();
-            return new JsonResult(rsvp);
+        [HttpPost("Authenticate")]
+        public IActionResult Authenticate([FromBody]AuthenticationRequest request)
+        {
+            var jwt = _user.Authenticate(request.Username, request.ProvidedPassword);
+            if (jwt == null)
+            {
+                return Unauthorized();
+            }
+            var authResponse = new AuthenticateResponse
+            {
+                Token = jwt,
+                Profile = UserProfile.TestProfile()
+            };
+            return Ok(authResponse);
         }
 
         [HttpPost]
-        public IActionResult SubmitRSVP(WeddingRSVP rsvp)
+        [Authorize(Roles = "Administrator")]
+        public IActionResult Create(User user)
         {
-            try
-            {
-                rsvp.Id = Guid.NewGuid().ToString();
-                Response.Cookies.Append("RSVP", rsvp.Id);
-
-                return Ok();
-
-                //_rsvpService.SaveRSVP(rsvp);
-                //return Ok();
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine("There was an error: " + e);
-                return BadRequest("There was an error");
-            }
+            var userIdClaim = HttpContext.User.Claims.Where(x => x.Type == "userid").SingleOrDefault();
+            return Ok($"Your User ID is {userIdClaim.Value} and you can create invoices!");
         }
 
-        // PUT: api/RSVP/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        [HttpGet("posts")]
+        public IActionResult GetUserPosts()
         {
+            var posts = new List<Post> { Post.TestPost(), Post.TestPost() };
+            return Ok(posts);
         }
     }
 }
