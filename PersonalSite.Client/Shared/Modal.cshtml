@@ -1,0 +1,29 @@
+﻿
+<div class="modal container">
+    <button type="button" class="close" aria-label="Close">
+        <span aria-hidden="true"> Close Modal &times;</span>
+    </button>
+
+    <div class="container">
+        <div>
+            <h2 class="modal-title">@ModalTitle</h2>
+            <p class="modal-text">@ModalText</p>
+        </div>
+    </div>
+
+</div>
+
+@functions {
+    bool collapseNavMenu = true;
+
+    [Parameter]
+    string ModalTitle { get; set; }
+
+    [Parameter]
+    string ModalText { get; set; }
+
+    void ToggleNavMenu()
+    {
+        collapseNavMenu = !collapseNavMenu;
+    }
+}

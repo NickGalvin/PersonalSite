@@ -1,0 +1,17 @@
+﻿
+<div id="Header" class="container-fluid">
+    <div class="navigation">
+        <div>
+            <a href="/blog">Blog</a>
+        </div>
+    </div>
+</div>
+
+@functions {
+    bool collapseNavMenu = true;
+
+    void ToggleNavMenu()
+    {
+        collapseNavMenu = !collapseNavMenu;
+    }
+}

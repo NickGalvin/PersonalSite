@@ -1,127 +1,49 @@
-﻿window.rsvpFunctions = {
-
-    validateRsvp: function () {
-        var isValid = true;
-
-        Array.from(document.getElementsByClassName('attendee')).forEach(function (attendeeElement) {
-
-            //Hide the messages and re-validate
-            attendeeElement.querySelector('.attendance-message').innerHTML = "";
-            attendeeElement.querySelector('.name-message').innerHTML = "";
-
-            var nameElement = attendeeElement.querySelector('.name');
-
-            //Remove class before re-validating. If still not correct it will show the error again.
-            nameElement.classList.remove('border-danger');
-
-            if (nameElement.value.trim() === '') {
-                nameElement.classList.add('border-danger');
-                var nameLabel = attendeeElement.querySelector('.name-label');
-                attendeeElement.querySelector('.name-message').innerHTML = "Name is Required";
-
-
-                isValid = false;
-            }
-
-            var attendanceSelect = attendeeElement.querySelector('.attendance');
-
-            //Remove class before re-validating. If still not correct it will show the error again.
-            attendanceSelect.classList.remove('border-danger');
-
-            if (attendanceSelect.selectedIndex === 0) {
-
-                attendanceSelect.classList.add('border-danger');
-                attendeeElement.querySelector('.attendance-message').innerHTML = "Please Select a Valid Response";
-                isValid = false;
-            }
-
-            return isValid;
-        })
-    },
-
-    hideCircleSpinner: function () {
-        $('.circle-loader').show();
-        $('.success-message').hide();
-    },
-
-    showSpinner: function () {
-        $('#RsvpForm').hide();
-        $('.circle-loader').show();
-    },
-
-    showSuccess: function () {
-        //$('.circle-loader').toggleClass('load-complete');
-        $('.checkmark').toggle();
-        $('.success-message').show();
-
-       // prompt('RSVP Submitted! See you at the reception!')
-    },
-
-    toggleCheckmark: function () {
-        $('.checkmark').toggle();
-    },
-
-    initializeTable: function () {
-        $('#RsvpTable').DataTable();
-    }
-}
-
-window.UpdateTimer = function () {
-
-    var weddingDate = new Date("2018-10-19T17:30").getTime();
-
-    if ($("#CountdownContainer").is(":visible")) {
-
-        var now = new Date().getTime();
-        var t = weddingDate - now;
-        var days = Math.floor(t / (1000 * 60 * 60 * 24));
-        var hours = Math.floor((t % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        var minutes = Math.floor((t % (1000 * 60 * 60)) / (1000 * 60));
-        var seconds = Math.floor((t % (1000 * 60)) / 1000);
-
-        if (seconds < 10) {
-            seconds = '0' + seconds;
-        }
-
-        var daysElement = document.getElementById('Days');
-        if (daysElement) {
-            daysElement.innerHTML = days;
-        }
-
-        var hoursElement = document.getElementById('Hours');
-        if (hoursElement) {
-            hoursElement.innerHTML = hours;
-        }
-
-        document.getElementById('Minutes').innerHTML = minutes;
-        document.getElementById('Seconds').innerHTML = seconds;
-
-        window.HideSpinner();
-    }
-    else {
-        document.body.style.overflow = 'scroll';
-    }
-}
+﻿//window.waitForElementToDisplay = function (selector, time) {
+//    console.log('waiting..');
+//    if (document.querySelector(selector) !== null) {
+//        alert("The element is displayed, you can put your code instead of this alert.")
+//        return;
+//    }
+//    else {
+//        setTimeout(function () {
+//            waitForElementToDisplay(selector, time);
+//        }, time);
+//    }
+//};
 
 window.homeFunctions = {
 
-    LoadHome: function () {
-        $('#DateTimeContainer').hide();
-        document.body.style.overflow = 'hidden';
+    initializeSlideshow: function () {
+        console.log('initializing slideshow');
+        var timer = setInterval(myTimer, 1000);
 
-        window.countdown = setInterval(window.UpdateTimer, 1000);
+        function myTimer() {
+            console.log('waiting..');
 
-        $('#LoadingSpinner').fadeOut(2);
-        $('#DateTimeContainer').show();
+            if (document.querySelector('.carousel-item') !== null) {
+                console.log('found');
+                slides();
+                window.clearInterval(timer);
+            }
+        }
+
+        function slides() {
+            $('.carousel').carousel({
+                interval: 3000
+            });
+        }
+    }
+};
+
+window.auth = {
+
+    getAccessToken: function () {
+        return window.sessionStorage.getItem('jwt');
     },
-}
+    
+    storeAccessToken: function(token) {
+        console.log(token);
 
-window.StopCountdown = function () {
-    document.body.style.overflow = 'scroll';
-    clearInterval(window.countdown);
-}
-
-window.HideSpinner = function () {
-    //$('#LoadingSpinner').hide();
-    $('#LoadingSpinner').fadeOut(2);
-}
+        window.sessionStorage.setItem("jwt", token);
+    }
+};

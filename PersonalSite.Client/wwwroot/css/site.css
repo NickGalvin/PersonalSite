@@ -1,19 +1,11 @@
 ﻿@import url('open-iconic/font/css/open-iconic-bootstrap.min.css');
 
-h1, h2, h3 {
-    font-family: 'muli', sans-serif;
-    text-align: center;
-    font-size: 3em;
-}
+/* Posts */
 
-h2 {
-    font-family: 'Lobster', cursive;
-    font-size: 5em;
-}
+.post
 
-#WeddingDetailsContainer {
-    margin: 3px;
-}
+
+
 
 .grow {
     transition: all .2s ease-in-out;

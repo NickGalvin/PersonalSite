@@ -9,6 +9,7 @@
     <PackageReference Include="AWSSDK.Extensions.NETCore.Setup" Version="3.3.6" />
     <PackageReference Include="AWSSDK.S3" Version="3.3.26.10" />
     <PackageReference Include="BCrypt-Official" Version="0.1.109" />
+    <PackageReference Include="Braintree" Version="4.8.0" />
     <PackageReference Include="Hangfire" Version="1.6.21" />
     <PackageReference Include="Microsoft.AspNetCore.App" Version="2.1.0" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="2.1.0" />
