@@ -1,4 +1,4 @@
-﻿@using PersonalSite.Shared.In
+﻿@using PersonalSite.Shared.Messages;
 @using Microsoft.JSInterop;
 @inherits BlazorLayoutComponent
 @inject HttpClient Http
@@ -9,40 +9,18 @@
     <div class="new-post mb-5 w-50 justify-content-center align-items-center flex-column">
         <div class="form-group">
             <label class="form-label">Title</label>
-            <input class="form-control" value="@newPost.Title" required/>
+            <input class="form-control" value="@message.Subject" required/>
         </div>
         <div class="form-group">
             <label class="form-label">Content</label>
-            <textarea class="form-control" value="@newPost.Content" required/>
+            <textarea class="form-control" value="@message.Body" required/>
         </div>
-        <button type="button" onclick="SubmitPost();">Submit</button>
+        <button type="button" onclick="SubmitMessage();">Submit</button>
     </div>
 </div>
 
 @functions{
-    Post newPost = new Post();
+    Message message = new Message();
 
-    List<Post> posts = new List<Post>();
-    protected override async Task OnInitAsync()
-    {
-        await GetPosts();
-    }
 
-    public async Task GetPosts()
-    {
-        posts = await Http.GetJsonAsync<List<Post>>("api/user/posts");
-    }
-
-    public async Task SubmitPost()
-    {
-        var createdPost = await Http.PostJsonAsync<Post>("api/user/posts", newPost);
-        posts.Add(createdPost);
-        newPost = new Post();
-    }
-
-    public async Task DeletePost(Post post)
-    {
-        posts.Remove(post);
-        await Http.DeleteAsync($"api/user/posts/{post.Id}");
-    }
 }
