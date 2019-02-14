@@ -61,7 +61,7 @@
 
     async Task<string> UploadFile()
     {
-        var data = await JSRuntime.Current.InvokeAsync<string>("window.GetFileData");
+        var data = await JSRuntime.Current.InvokeAsync<string>("GetFileData(fileUpload)");
         var response = await Http.PostAsync("/api/upload", new ByteArrayContent(Convert.FromBase64String(data)));
         return await response.Content.ReadAsStringAsync();
     }

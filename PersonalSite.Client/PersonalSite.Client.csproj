@@ -8,8 +8,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Blazor.Browser" Version="0.6.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Blazor.Build" Version="0.6.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Blazor.Browser" Version="0.7.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Blazor.Build" Version="0.7.0" />
     <PackageReference Include="System.ComponentModel" Version="4.3.0" />
     <DotNetCliToolReference Include="Microsoft.AspNetCore.Blazor.Cli" Version="0.5.1" />
   </ItemGroup>
@@ -19,9 +19,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Update="Pages\Contact.cshtml">
-      <Pack>$(IncludeRazorContentInPack)</Pack>
-    </Content>
     <Content Update="Pages\Blog.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
@@ -31,7 +28,7 @@
     <Content Update="Shared\Header.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
-    <Content Update="Shared\LoadingSpinner.cshtml">
+    <Content Update="Shared\FileUpload.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
     <Content Update="Shared\FileUpload.cshtml">

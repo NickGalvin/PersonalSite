@@ -9,6 +9,7 @@ using PersonalSite.Server.Services;
 using PersonalSite.Shared.Auth;
 using PersonalSite.Shared.Blog;
 using Microsoft.AspNetCore.Authorization;
+using PersonalSite.Shared.Authentication;
 
 namespace PersonalSite.Server.Controllers
 {

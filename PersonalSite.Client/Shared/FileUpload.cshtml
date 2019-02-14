@@ -5,18 +5,16 @@
     }
 
 </style>
-
-<div class="row file-upload">
-    <div>
-        <input type="file"  autocomplete="on" class="file-input"/>
+<div class="upload-container">
+    <div class="form-group">
+        <label for="exampleFormControlFile1">Example file input</label>
+        <input type="file" class="form-control-file">
     </div>
 </div>
 
 @functions {
-    bool collapseNavMenu = true;
 
-    void ToggleNavMenu()
+    void UploadFiles()
     {
-        collapseNavMenu = !collapseNavMenu;
     }
 }

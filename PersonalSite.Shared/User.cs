@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace PersonalSite.Shared.Auth
+namespace PersonalSite.Shared
 {
     public class User : IUser
     {
@@ -15,7 +15,5 @@ namespace PersonalSite.Shared.Auth
         public string FacebookId { get; set; }
         public string GoogleId { get; set; }
 
-        public string Role { get; set; }
     }
 }
-

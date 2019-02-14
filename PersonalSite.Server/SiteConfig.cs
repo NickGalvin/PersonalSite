@@ -40,4 +40,10 @@ namespace PersonalSite.Server
         public string PublicKey { get; set; }
         public string PrivateKey { get; set; }
     }
+
+    public class FacebookConfig
+    {
+        public string SecretKey { get; set; }
+        public string AccessKey { get; set; }
+    }
 }

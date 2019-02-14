@@ -7,5 +7,8 @@ namespace PersonalSite.Server.Services
 {
     public class OrderService
     {
+        public OrderService()
+        {
+        }
     }
 }
