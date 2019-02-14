@@ -1,18 +1,21 @@
-﻿using System;
+﻿using Microsoft.AspNet.Identity;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace PersonalSite.Shared.Auth
 {
-    public class User 
+    public class User : IUser
     {
-        public string Id { get; set; }
-        public string Username { get; set; }
-        public string Password { get; set; }
+        string IUser<string>.Id { get; }
+        string IUser<string>.UserName { get; set; }
 
-        //public string FacebookId { get; set; }
-        //public string GoogleId { get; set; }
+        public string Email { get; set; }
+        public string Password { get; set; }
+        public string FacebookId { get; set; }
+        public string GoogleId { get; set; }
 
         public string Role { get; set; }
     }
 }
+

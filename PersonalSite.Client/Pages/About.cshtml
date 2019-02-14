@@ -1,0 +1,41 @@
+﻿@using PersonalSite.Shared
+@using Microsoft.JSInterop;
+@inherits BlazorLayoutComponent
+@inject HttpClient Http
+
+@page "/About"
+<div>
+    <h1>About</h1>
+    <div class="social">
+        <div>
+            <a href="https://www.facebook.com/nick.m.galvin" class="facebook-link">
+                <img class="social-logo" src="/Images/Logos/Logo-Facebook.png" alt="Facebook" />
+            </a>
+        </div>
+        <div>
+            <a href="https://www.linkedin.com/in/nicholas-galvin-7b85615b" class="linkedin-link">
+                <img class="social-logo"src="/Images/Logos/Logo-LinkedIn.png" alt="LinkedIn" />
+            </a>
+        </div>
+        <div>
+            <a href="https://paypal.me/NickGalvin?locale.x=en_US" class="paypal-link">
+                <img class="social-logo" src="/Images/Logos/Logo-PayPal.png" alt="PayPal" />
+            </a>
+        </div>
+    </div>
+</div>
+
+@functions{
+
+    Bio myBio = new Bio();
+
+    public async Task<Bio> GetBio()
+    {
+        //Validate form
+        //JavaScriptRuntime.ExecuteAsync("validateInquiry");
+
+        inquiry = await Http.GetJsonAsync<Bio>("api/About/Me");
+
+        return inquiry;
+    }
+}

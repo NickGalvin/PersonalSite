@@ -19,9 +19,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Update="Pages\Contact.cshtml">
-      <Pack>$(IncludeRazorContentInPack)</Pack>
-    </Content>
     <Content Update="Pages\Blog.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>

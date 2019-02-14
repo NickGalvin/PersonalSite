@@ -23,5 +23,8 @@ namespace PersonalSite.Shared
         public string Email { get; set; }
 
         public string Phone { get; set; }
+
+        public MethodOfContact PreferredMethodOfContact { get; set; }
+        public string OtherMethodOfContact { get; set; }
     }
 }

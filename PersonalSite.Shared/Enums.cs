@@ -32,4 +32,12 @@ namespace PersonalSite.Shared
         Captured,
         Error
     }
+
+    public enum MethodOfContact
+    {
+        DoNotContact,
+        Phone,
+        Email,
+        Other
+    }
 }

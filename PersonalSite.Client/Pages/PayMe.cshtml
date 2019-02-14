@@ -1,0 +1,29 @@
+﻿@using PersonalSite.Shared
+@using Microsoft.JSInterop;
+@inherits BlazorLayoutComponent
+@inject HttpClient Http
+
+@page "/PayMe"
+<div>
+    <h1>PayMe</h1>
+     <div>
+        <a href-="https://paypal.me/NickGalvin?locale.x=en_US" class="payment-method paypal-link">
+            <img src="/Images/Logos/Logo-PayPal.png" alt="PayPal"/>
+        </a>
+     </div>
+</div>
+
+@functions{
+
+    Inquiry inquiry = new Inquiry();
+
+    public async Task<Inquiry> SubmitInquiry()
+    {
+        //Validate form
+        //JavaScriptRuntime.ExecuteAsync("validateInquiry");
+
+        inquiry = await Http.GetJsonAsync<Inquiry>("api/About/Me");
+
+        return inquiry;
+    }
+}
