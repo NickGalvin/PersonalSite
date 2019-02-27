@@ -23,7 +23,7 @@ namespace PersonalSite.Server.Controllers
         [HttpGet("/Me")]
         public  IActionResult Me()
         {
-            return Json(new { });
+            return Ok(new { });
         }
     }
 }

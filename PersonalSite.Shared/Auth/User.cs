@@ -5,11 +5,10 @@ using System.Text;
 
 namespace PersonalSite.Shared.Auth
 {
-    public class User : IUser
+    public class User
     {
-        string IUser<string>.Id { get; }
-        string IUser<string>.UserName { get; set; }
-
+        public string Id { get; set; }
+        public string Username { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
         public string FacebookId { get; set; }

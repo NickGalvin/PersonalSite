@@ -7,8 +7,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PersonalSite.Client", "Pers
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PersonalSite.Shared", "PersonalSite.Shared\PersonalSite.Shared.csproj", "{88501098-1F87-43F5-AB7A-BD23387124C2}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Site.Core", "Site.Core\Site.Core.csproj", "{2ADB4665-B652-4EBD-99E8-39AACDDE9EFF}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PersonalSite.Server", "PersonalSite.Server\PersonalSite.Server.csproj", "{0246F00B-02A1-484A-A06D-92EFC82202C9}"
 EndProject
 Global
@@ -25,10 +23,6 @@ Global
 		{88501098-1F87-43F5-AB7A-BD23387124C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{88501098-1F87-43F5-AB7A-BD23387124C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{88501098-1F87-43F5-AB7A-BD23387124C2}.Release|Any CPU.Build.0 = Release|Any CPU
-		{2ADB4665-B652-4EBD-99E8-39AACDDE9EFF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2ADB4665-B652-4EBD-99E8-39AACDDE9EFF}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2ADB4665-B652-4EBD-99E8-39AACDDE9EFF}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2ADB4665-B652-4EBD-99E8-39AACDDE9EFF}.Release|Any CPU.Build.0 = Release|Any CPU
 		{0246F00B-02A1-484A-A06D-92EFC82202C9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{0246F00B-02A1-484A-A06D-92EFC82202C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0246F00B-02A1-484A-A06D-92EFC82202C9}.Release|Any CPU.ActiveCfg = Release|Any CPU

@@ -23,7 +23,7 @@ namespace PersonalSite.Server.Controllers
                 "https://s3.amazonaws.com/nickgalvin.com/Slideshow/Oscar.jpg"
             };
 
-            return new JsonResult(images);
+            return Ok(images);
         }
     }
 }

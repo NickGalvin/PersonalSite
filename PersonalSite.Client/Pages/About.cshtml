@@ -1,4 +1,4 @@
-﻿@using PersonalSite.Shared
+﻿@using PersonalSite.Shared.People
 @using Microsoft.JSInterop;
 @inherits BlazorLayoutComponent
 @inject HttpClient Http
@@ -29,13 +29,11 @@
 
     Bio myBio = new Bio();
 
-    public async Task<Bio> GetBio()
+    public async Task GetBio()
     {
         //Validate form
         //JavaScriptRuntime.ExecuteAsync("validateInquiry");
 
-        inquiry = await Http.GetJsonAsync<Bio>("api/About/Me");
-
-        return inquiry;
+        myBio = await Http.GetJsonAsync<Bio>("api/About/Me");
     }
 }

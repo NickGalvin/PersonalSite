@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using PayPal.Api;
+using PersonalSite.Shared.Order;
 
 namespace PersonalSite.Server.Services
 {
@@ -14,11 +14,11 @@ namespace PersonalSite.Server.Services
 
         public void Test()
         {
-            OAuthTokenCredential creds = new OAuthTokenCredential(PublicKey, PrivateKey);
-            var accessToken = creds.GetAccessToken();
+            //OAuthTokenCredential creds = new OAuthTokenCredential(PublicKey, PrivateKey);
+            //var accessToken = creds.GetAccessToken();
 
-            var payment = new Payment();
-            payment = Payment.Create(new APIContext(accessToken), payment);
+            //var payment = new Payment();
+            //payment = Payment.Create(new APIContext(accessToken), payment);
 
         }
     }

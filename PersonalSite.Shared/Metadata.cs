@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Site.Core
+namespace PersonalSite.Shared
 {
     public class Metadata
     {

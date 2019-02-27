@@ -1,5 +1,6 @@
 ﻿using PersonalSite.Shared;
 using PersonalSite.Server.Data;
+using PersonalSite.Server;
 using PersonalSite.Shared.Auth;
 using System;
 using System.Collections.Generic;
@@ -9,6 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System.Security.Claims;
 using System.IdentityModel.Tokens.Jwt;
+using Microsoft.AspNet.Identity;
 
 namespace PersonalSite.Server.Services
 {
@@ -18,7 +20,7 @@ namespace PersonalSite.Server.Services
         private readonly SiteConfig _config;
         private readonly List<User> _users = new List<User>
         {
-            new User{ Id="1", Username="nick.m.galvin@gmail.com", Password="Test", Role ="Administrator" }
+            new User{  Id = "1", Username = "nick.m.galvin@gmail.com", Password="Test", Role ="Administrator" }
         };
 
         public UserService(SiteDbContext db, SiteConfig config)

@@ -1,6 +1,7 @@
-﻿using System;
+﻿using PersonalSite.Shared;
+using System;
 
-namespace Site.Core
+namespace PesronalSite.Shared.Files
 {
     public class File
     {

@@ -2,11 +2,6 @@
 
 /* Posts */
 
-.post
-
-
-
-
 .grow {
     transition: all .2s ease-in-out;
 }
@@ -23,7 +18,7 @@
 
 .grow:hover {
     transform: scale(1.2);
-    transition-duration: 0.3s;
+    transition-duration: 0.1s;
     box-shadow: 0 0 1px rgba(0, 0, 0, 0);
 }
 
@@ -51,204 +46,36 @@ footer {
 ***************/
 #navigation {
     position: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     top: 0;
     background-color: white;
     z-index: 9999;
     width: 100%;
-    margin: 0 auto;
+}
+
+.navigation-link {
+    font-family: 'Dosis', sans-serif;
+    text-transform: uppercase;
+    margin: 1em 3em;
 }
 
 .underline {
-    border-top: 3px solid white);
+    border-top: 3px solid rgb(175, 175, 175);
     width: 100%;
     margin: 0 auto;
     z-index: 9999;
 }
 
-#LinksContainer {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-    #LinksContainer > div {
-        padding: 0 1.5em;
-        margin: .5em 1em;
-        max-height: 50px;
-    }
-
-    #LinksContainer a {
-        font-family: 'muli', sans-serif;
-        color: rgba(0,0,0, 60%);
-        font-size: 3em;
-    }
-
-@media only screen and (max-width: 900px) {
-    #LinksContainer a {
-    }
-}
-
-#LinksContainer > div :hover {
-    cursor: pointer;
-    text-decoration: unset;
-}
-
-.linkContainer img {
-    height: 1em;
-    width: auto;
-    margin-bottom: .25em;
-}
-
-#HomeLinkContainer img {
-    margin-bottom: 10px;
-}
-
-
 /**************
-    HOME PAGE
+    CONTACT PAGE
 ***************/
-
-#DaysContainer {
-    margin-right: 3em;
-}
-
-#Days, #Hours, #Minutes, #Seconds {
-    font-size: 4em;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 1em;
-}
-
-.separator {
-    margin: 0;
-    font-size: 2em;
-    padding-bottom: .5em;
-}
-
-#CountdownContainer {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    margin-top: -1em;
-    margin-bottom: .5em;
-}
-
-.days-text {
-    font-size: 3em;
-}
-
-.time-text {
-    font-size: .75em;
-}
-
-#DateTimeContainer {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-family: 'Lobster', cursive;
-}
-
-    #DateTimeContainer > div {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
-    }
-
-#Hashtag {
-    font-size: 4em;
-    font-family: 'muli', sans-serif;
-    text-align: center;
-    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
-}
-
-.getting-married {
-    font-family: 'Lobster', cursive;
-    font-size: 6em;
-    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
-}
-
-#RSVPButton {
-    font-family: 'Lobster', cursive;
-    font-size: 5em;
-    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
-    color: white;
-    cursor: pointer;
-    background-color: rgba(0,0,0,40%);
-    padding: 0;
-    margin-bottom: .5em;
-}
-
-    #RSVPButton:hover {
-    }
-
-.wedding-date {
-    font-family: 'Lobster', cursive;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.inquiry-container{
+    width: 50%;
     padding: 1em;
-    color: white;
-    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
-    font-size: 3em;
+    margin: 0 auto;
 }
 
-#ImageContainer {
-    position: relative;
-    text-align: center;
-    color: white;
-    height: 100vh;
-    background: url("https://s3.us-east-2.amazonaws.com/nickandmandygalvin.com/Images/Engagement.jpg") no-repeat center center fixed;
-    background-size: cover;
+.inquiry-form {
 }
-
-#image-text-container-1 {
-    position: absolute;
-    top: 15%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: white;
-    letter-spacing: 5px;
-    background-color: rgba(0,0,0,.4);
-    max-height: 175px;
-}
-
-#image-text-container {
-    position: absolute;
-    top: 75%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    letter-spacing: 5px;
-    width: 100%;
-}
-
-    #image-text-container a:hover {
-        text-decoration: unset;
-    }
-
-#CountDown {
-    font-family: 'Great Vibes', cursive;
-}
-
-#RsvpForm {
-    background-color: transparent;
-    color: white;
-}
-
-
-    .attendee{
-        margin: 2em 0;
-        background-color: transparent;
-
-    }
-
-    .attendee-info {
-    }
-    .remove-person {
-    }
-
-    .validation-error{
-        border: 1px solid red;
-    }

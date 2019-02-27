@@ -17,7 +17,8 @@ using PersonalSite.Server.Services;
 using PersonalSite.Shared;
 using System.Linq;
 using System.Net.Mime;
-using PayPal.Api;
+using Site.Core;
+using System;
 
 namespace PersonalSite.Server
 {
@@ -49,24 +50,13 @@ namespace PersonalSite.Server
                         IssuerSigningKey = new SymmetricSecurityKey(signingKey)
                     };
                 });
-            Config = config;
-        }
 
-        private IConfiguration Config { get; }
-
-        // This method gets called by the runtime. Use this method to add services to the container.
-        // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
-        public void ConfigureServices(IServiceCollection services)
-        {
             services.Configure<CookiePolicyOptions>(options =>
             {
                 // This lambda determines whether user consent for non-essential cookies is needed for a given request.
                 options.CheckConsentNeeded = context => true;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
-            services.AddMvc()
-                    .AddJsonOptions(opt => opt.SerializerSettings.ContractResolver = new DefaultContractResolver()) //Use PascalCase in responses instead of camelCase
-                    .AddJsonOptions(opt => opt.SerializerSettings.NullValueHandling = NullValueHandling.Ignore);
 
             //services.AddAuthentication()
             //            .AddMicrosoftAccount(microsoftOptions => { })
@@ -79,33 +69,8 @@ namespace PersonalSite.Server
             //                facebookOptions.ClientId = "";
             //                });
 
-            //services.AddDbContext<ApplicationDbContext>(options =>
-            //                options.UseSqlServer(
-            //                    Configuration.GetConnectionString("DefaultConnection")));
-            //services.AddDefaultIdentity<IdentityUser>()
-            //    .AddEntityFrameworkStores<ApplicationDbContext>();
-
-
-
-            //services.AddResponseCompression(options =>
-            //{
-            //    options.MimeTypes = ResponseCompressionDefaults.MimeTypes.Concat(new[]
-            //    {
-            //        MediaTypeNames.Application.Octet,
-            //        WasmMediaTypeNames.Application.Wasm,
-            //    });
-            //});
-            services.AddResponseCompression(options =>
-            {
-                options.MimeTypes = ResponseCompressionDefaults.MimeTypes.Concat(new[]
-                {
-                    MediaTypeNames.Application.Octet,
-                    WasmMediaTypeNames.Application.Wasm,
-                });
-            });
-
             //  services.Configure<IISOptions>(o => o.AutomaticAuthentication = true);
-            services.AddDefaultAWSOptions(Config.GetAWSOptions());
+            services.AddDefaultAWSOptions(Configuration.GetAWSOptions());
             services.AddAWSService<IAmazonS3>();
             services.AddEntityFrameworkInMemoryDatabase();
 

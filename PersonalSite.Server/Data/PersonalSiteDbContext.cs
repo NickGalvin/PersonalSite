@@ -1,6 +1,7 @@
 ﻿using JetBrains.Annotations;
 using Microsoft.EntityFrameworkCore;
 using PersonalSite.Shared;
+using PersonalSite.Shared.Auth;
 using System;
 using System.Collections.Generic;
 using System.Linq;
